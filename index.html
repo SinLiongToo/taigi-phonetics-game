@@ -1212,6 +1212,10 @@ html, body {
      4. 視圖與導覽控制 (確保隨時一鍵回到主頁 / 選關 / 圖鑑)
      ========================================================================= */
   window.switchView = function(targetView) {
+    if (activeVoiceAudio) {
+      try { activeVoiceAudio.pause(); activeVoiceAudio.currentTime = 0; } catch (e) {}
+      activeVoiceAudio = null;
+    }
     closeModal();
     STATE.view = targetView;
     document.querySelectorAll('.view-section').forEach(sec => {
@@ -1363,7 +1367,16 @@ html, body {
   function closeModal() {
     backdrop.classList.remove('open');
   }
-  backdrop.onclick = (e) => { if (e.target === backdrop) closeModal(); };
+  backdrop.onclick = (e) => {
+    if (e.target === backdrop) {
+      const isIntro = !!modalCard.querySelector('#intro-go');
+      closeModal();
+      if (isIntro) {
+        const q = currentQ();
+        if (q) speakPhonetic(q.pkey, q.word);
+      }
+    }
+  };
 
   function openPhoneticModal(pkey, onContinue = null) {
     const p = PHONETICS[pkey];
@@ -1423,6 +1436,11 @@ html, body {
   }
 
   function openUnitIntroModal(unit) {
+    if (activeVoiceAudio) {
+      try { activeVoiceAudio.pause(); activeVoiceAudio.currentTime = 0; } catch (e) {}
+      activeVoiceAudio = null;
+    }
+
     const keysHtml = unit.keys.slice(0, 8).map(k => {
       const p = PHONETICS[k];
       const w = p.words[0];
@@ -1435,7 +1453,7 @@ html, body {
               <div style="font-size:12px;color:var(--text-muted)">${p.tip}</div>
             </div>
           </div>
-          <span>🔊</span>
+          <span style="font-size:22px">🔊</span>
         </div>
       `;
     }).join('');
@@ -1446,18 +1464,29 @@ html, body {
         <button type="button" class="nav-btn" id="intro-skip">直接開始</button>
       </div>
       <h2 style="font-size:26px;color:var(--accent-gold)">${unit.title}：${unit.sub}</h2>
-      <p style="font-size:14px;color:var(--text-muted)">點選下方卡片可以先聽發音，準備好就按「開始遊戲」！</p>
+      <p style="font-size:14px;color:var(--text-muted)">點選下方字母例字卡可聽發音，準備好就按「開始遊戲」！</p>
       <div class="example-list" style="grid-template-columns:1fr">${keysHtml}</div>
       <div style="display:flex;justify-content:space-between;gap:10px;margin-top:8px">
-        <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 回主頁</button>
+        <button type="button" class="nav-btn home-btn" onclick="switchView('levels')">🚩 換關卡</button>
         <button type="button" class="cta-btn gold" id="intro-go">🔨 準備好了，開始遊戲！</button>
       </div>
     `;
     backdrop.classList.add('open');
-    document.getElementById('intro-skip').onclick = closeModal;
-    document.getElementById('intro-go').onclick = closeModal;
+
+    const startGameAction = () => {
+      closeModal();
+      const q = currentQ();
+      if (q) speakPhonetic(q.pkey, q.word);
+    };
+
+    document.getElementById('intro-skip').onclick = startGameAction;
+    document.getElementById('intro-go').onclick = startGameAction;
     modalCard.querySelectorAll('[data-intro-key]').forEach(el => {
-      el.onclick = () => speakPhonetic(el.dataset.introKey);
+      const k = el.dataset.introKey;
+      const p = PHONETICS[k];
+      el.onclick = () => {
+        if (p) speakPhonetic(k, p.words[0]);
+      };
     });
   }
 
@@ -1602,11 +1631,12 @@ html, body {
     GAME.active = true;
 
     initMoleHoles();
-    setupCurrentQuestion();
 
     if (!unit.boss) {
+      setupCurrentQuestion(false); // 不在課前看板開啟時偷播題目音效
       openUnitIntroModal(unit);
     } else {
+      setupCurrentQuestion(true);
       showToast('👑 大魔王總挑戰開始！看準題目快手出擊！', 3.2);
     }
   }
@@ -1650,14 +1680,16 @@ html, body {
     if (q) openPhoneticModal(q.pkey);
   };
 
-  function setupCurrentQuestion() {
+  function setupCurrentQuestion(autoSpeak = true) {
     const q = currentQ();
     if (!q) {
       openResultModal();
       return;
     }
     updateQuestionBanner();
-    speakPhonetic(q.pkey, q.word);
+    if (autoSpeak) {
+      speakPhonetic(q.pkey, q.word);
+    }
 
     if (STATE.mode === 'mole') {
       spawnMoleWaveForQ(q);
