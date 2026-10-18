@@ -840,224 +840,216 @@ html, body {
      1. 全新原創台語子母音教材資料庫 (100% NFC 正規化 UTF-8，零亂碼)
      ========================================================================= */
   const PHONETICS = {
-    // 雙唇子音
-    p:   { key:'p',   cat:'子音（雙唇音）', tag:'不送氣清音', tip:'雙唇緊閉再輕輕放開，不噴氣（像國語「ㄅ」）。', words:[
-      { h:'飛凌機', tl:'[p]ue-lîng-ki', m:'飛機', e:'🚀', pre:'', ans:'p', post:'ue-lîng-ki' },
-      { h:'包子',   tl:'[p]au-á',       m:'包子', e:'🥟', pre:'', ans:'p', post:'au-á' },
-      { h:'西瓜',   tl:'si-kue ([p]ué)',m:'布袋/尾巴', e:'🎒', pre:'', ans:'p', post:'ué' }
-    ]},
-    ph:  { key:'ph',  cat:'子音（雙唇音）', tag:'送氣清音', tip:'雙唇合起來再用力噴氣出來，手放嘴前會感覺到風（像國語「ㄆ」）。', words:[
-      { h:'氣球',   tl:'[ph]òng-kiû',   m:'氣球', e:'🎈', pre:'', ans:'ph', post:'òng-kiû' },
-      { h:'蘋果',   tl:'[ph]ông-kó',    m:'蘋果', e:'🍎', pre:'', ans:'ph', post:'ông-kó' },
-      { h:'蜜蜂',   tl:'bi̍t-[ph]ang',   m:'蜜蜂', e:'🐝', pre:'bi̍t-', ans:'ph', post:'ang' }
-    ]},
-    b:   { key:'b',   cat:'子音（雙唇音）', tag:'台語特有濁音', tip:'雙唇合起來，喉嚨同時震動發聲（像英語 boy 的 b，國語沒有這個音喔！）。', words:[
-      { h:'白米',   tl:'pe̍h-[b]í',      m:'白米', e:'🍚', pre:'pe̍h-', ans:'b', post:'í' },
-      { h:'帽仔',   tl:'[b]ō-á',        m:'帽子', e:'🧢', pre:'', ans:'b', post:'ō-á' },
-      { h:'馬仔',   tl:'[b]é-á',        m:'小馬', e:'🐴', pre:'', ans:'b', post:'é-á' }
-    ]},
-    m:   { key:'m',   cat:'子音（雙唇音）', tag:'雙唇鼻音', tip:'雙唇閉起來，讓聲音從鼻孔哼出來（像國語「ㄇ」）。', words:[
-      { h:'麵線',   tl:'[m]ī-suànn',    m:'麵線', e:'🍜', pre:'', ans:'m', post:'ī-suànn' },
-      { h:'門扇',   tl:'[m]n̂g-sìnn',    m:'大門', e:'🚪', pre:'', ans:'m', post:'n̂g-sìnn' },
-      { h:'目睭',   tl:'[m]a̍k-tsiu',    m:'眼睛', e:'👀', pre:'', ans:'m', post:'a̍k-tsiu' }
-    ]},
-
-    // 舌尖子音
-    t:   { key:'t',   cat:'子音（舌尖音）', tag:'不送氣清音', tip:'舌尖頂住上牙齒後方再放開，不噴氣（像國語「ㄉ」）。', words:[
-      { h:'茶杯',   tl:'[t]ê-pue',      m:'茶杯', e:'🍵', pre:'', ans:'t', post:'ê-pue' },
-      { h:'小豬',   tl:'sió-[t]i',      m:'小豬', e:'🐷', pre:'sió-', ans:'t', post:'i' },
-      { h:'大象',   tl:'[t]uā-tshiūnn', m:'大象', e:'🐘', pre:'', ans:'t', post:'uā-tshiūnn' }
-    ]},
-    th:  { key:'th',  cat:'子音（舌尖音）', tag:'送氣清音', tip:'舌尖頂住上牙齦再用力噴氣（像國語「ㄊ」）。', words:[
-      { h:'糖仔',   tl:'[th]n̂g-á',      m:'糖果', e:'🍬', pre:'', ans:'th', post:'n̂g-á' },
-      { h:'兔仔',   tl:'[th]òo-á',      m:'兔子', e:'🐰', pre:'', ans:'th', post:'òo-á' },
-      { h:'天頂',   tl:'[th]inn-tíng',  m:'天空', e:'🌈', pre:'', ans:'th', post:'inn-tíng' }
-    ]},
-    n:   { key:'n',   cat:'子音（舌尖音）', tag:'舌尖鼻音', tip:'舌尖頂住上牙齦，聲音從鼻孔出來（像國語「ㄋ」）。', words:[
-      { h:'貓咪',   tl:'[n]iau-mi',     m:'貓咪', e:'🐱', pre:'', ans:'n', post:'iau-mi' },
-      { h:'竹籃',   tl:'tik-[n]â',      m:'籃子', e:'🧺', pre:'tik-', ans:'n', post:'â' },
-      { h:'過年',   tl:'kuè-[n]î',      m:'過年', e:'🧧', pre:'kuè-', ans:'n', post:'î' }
-    ]},
-    l:   { key:'l',   cat:'子音（舌尖音）', tag:'舌尖邊音', tip:'舌尖輕輕彈一下上牙齦（像國語「ㄌ」）。', words:[
-      { h:'露螺',   tl:'[l]ōo-lê',      m:'蝸牛', e:'🐌', pre:'', ans:'l', post:'ōo-lê' },
-      { h:'梅鹿',   tl:'muî-[l]o̍k',     m:'小鹿', e:'🦌', pre:'muî-', ans:'l', post:'o̍k' },
-      { h:'火車路', tl:'hué-tshia-[l]ōo',m:'鐵路', e:'🚂', pre:'hué-tshia-', ans:'l', post:'ōo' }
-    ]},
-
-    // 舌根與喉音
-    k:   { key:'k',   cat:'子音（舌根與喉音）', tag:'不送氣清音', tip:'舌根頂住軟顎再放開，不噴氣（像國語「ㄍ」）。', words:[
-      { h:'小狗',   tl:'sió-[k]áu',     m:'小狗', e:'🐶', pre:'sió-', ans:'k', post:'áu' },
-      { h:'金雞',   tl:'kim-[k]e',      m:'公雞', e:'🐓', pre:'kim-', ans:'k', post:'e' },
-      { h:'烏龜',   tl:'oo-[k]u',       m:'烏龜', e:'🐢', pre:'oo-', ans:'k', post:'u' }
-    ]},
-    kh:  { key:'kh',  cat:'子音（舌根與喉音）', tag:'送氣清音', tip:'舌根頂住軟顎再用力噴氣（像國語「ㄎ」）。', words:[
-      { h:'長褲',   tl:'tn̂g-[kh]òo',    m:'長褲', e:'👖', pre:'tn̂g-', ans:'kh', post:'òo' },
-      { h:'彩虹',   tl:'[kh]īng',       m:'彩虹', e:'🌈', pre:'', ans:'kh', post:'īng' },
-      { h:'開門',   tl:'[kh]ui-mn̂g',    m:'開門', e:'🔓', pre:'', ans:'kh', post:'ui-mn̂g' }
-    ]},
-    g:   { key:'g',   cat:'子音（舌根與喉音）', tag:'台語特有濁音', tip:'舌根頂住上顎，喉嚨震動發出濁音（像英語 go 的 g，國語沒有喔！）。', words:[
-      { h:'水牛',   tl:'tsuí-[g]û',     m:'水牛', e:'🐮', pre:'tsuí-', ans:'g', post:'û' },
-      { h:'白鵝',   tl:'pe̍h-[g]ô',      m:'白鵝', e:'🦢', pre:'pe̍h-', ans:'g', post:'ô' },
-      { h:'月娘',   tl:'[g]ue̍h-niû',    m:'月亮', e:'🌙', pre:'', ans:'g', post:'ue̍h-niû' }
-    ]},
-    ng:  { key:'ng',  cat:'子音（舌根與喉音）', tag:'舌根鼻音', tip:'舌根抵住軟顎，讓聲音從鼻子哼出來。', words:[
-      { h:'黃色',   tl:'[ng]g-sik',     m:'黃色/硬', e:'🪨', pre:'', ans:'ng', post:'ē' },
-      { h:'五彩',   tl:'[ng]óo-tshái',  m:'五彩', e:'🎨', pre:'', ans:'ng', post:'óo-tshái' },
-      { h:'迎鬧熱', tl:'[ng]iâ-lāu-jia̍t',m:'迎神慶典', e:'🎉', pre:'', ans:'ng', post:'iâ' }
-    ]},
-    h:   { key:'h',   cat:'子音（舌根與喉音）', tag:'喉擦音', tip:'從喉嚨輕輕呵氣出來（像國語「ㄏ」）。', words:[
-      { h:'紅花',   tl:'âng-[h]ue',     m:'紅花', e:'🌺', pre:'âng-', ans:'h', post:'ue' },
-      { h:'金魚',   tl:'kim-[h]î',      m:'金魚', e:'🐟', pre:'kim-', ans:'h', post:'î' },
-      { h:'老虎',   tl:'lāu-[h]óo',     m:'老虎', e:'🐯', pre:'lāu-', ans:'h', post:'óo' }
-    ]},
-
-    // 齒音
-    ts:  { key:'ts',  cat:'子音（齒音）', tag:'不送氣塞擦音', tip:'舌尖頂住齒齦再微開，不噴氣（像國語「ㄗ／ㄐ」）。', words:[
-      { h:'鳥仔',   tl:'[ts]iáu-á',     m:'小鳥', e:'🐦', pre:'', ans:'ts', post:'iáu-á' },
-      { h:'甘蔗',   tl:'kam-[ts]ià',    m:'甘蔗', e:'🎋', pre:'kam-', ans:'ts', post:'ià' },
-      { h:'喝水',   tl:'lim-[ts]uí',    m:'喝水', e:'💧', pre:'lim-', ans:'ts', post:'uí' }
-    ]},
-    tsh: { key:'tsh', cat:'子音（齒音）', tag:'送氣塞擦音', tip:'跟 ts 同位置，但要用力噴氣（像國語「ㄘ／ㄑ」）。', words:[
-      { h:'火車',   tl:'hué-[tsh]ia',   m:'火車', e:'🚂', pre:'hué-', ans:'tsh', post:'ia' },
-      { h:'青菜',   tl:'tshenn-[tsh]ài',m:'青菜', e:'🥬', pre:'tshenn-', ans:'tsh', post:'ài' },
-      { h:'大樹',   tl:'tuā-[tsh]iū',   m:'大樹', e:'🌳', pre:'tuā-', ans:'tsh', post:'iū' }
-    ]},
-    s:   { key:'s',   cat:'子音（齒音）', tag:'清擦音', tip:'舌尖靠近齒齦留縫隙摩擦出氣（像國語「ㄙ／ㄒ」）。', words:[
-      { h:'西瓜',   tl:'[s]i-kue',      m:'西瓜', e:'🍉', pre:'', ans:'s', post:'i-kue' },
-      { h:'獅王',   tl:'[s]ai-ông',     m:'獅子', e:'🦁', pre:'', ans:'s', post:'ai-ông' },
-      { h:'高山',   tl:'ko-[s]uann',    m:'高山', e:'🌋', pre:'ko-', ans:'s', post:'uann' }
-    ]},
-    j:   { key:'j',   cat:'子音（齒音）', tag:'台語特有濁音', tip:'舌尖摩擦並讓喉嚨震動（像英語 zoo 的 z）。', words:[
-      { h:'日頭',   tl:'[j]i̍t-thâu',    m:'太陽', e:'🌞', pre:'', ans:'j', post:'i̍t-thâu' },
-      { h:'寫字',   tl:'siá-[j]ī',      m:'寫字', e:'📝', pre:'siá-', ans:'j', post:'ī' },
-      { h:'熱天',   tl:'[j]ua̍h-thinn',  m:'夏天炎熱', e:'🔥', pre:'', ans:'j', post:'ua̍h-thinn' }
-    ]},
-
-    // 六個基礎母音
-    a:   { key:'a',   cat:'基礎母音', tag:'大口元音', tip:'嘴巴自然張大發出「ㄚ」的聲音。', words:[
-      { h:'鴨仔',   tl:'[a]h-á',        m:'小鴨', e:'🦆', pre:'', ans:'a', post:'h-á' },
-      { h:'阿媽',   tl:'a-m[á]',        m:'奶奶', e:'👵', pre:'a-m', ans:'a', post:'' },
-      { h:'腳踏車', tl:'kh[a]-ta̍h-tshia',m:'腳踏車', e:'🚲', pre:'kh', ans:'a', post:'-ta̍h-tshia' }
-    ]},
-    i:   { key:'i',   cat:'基礎母音', tag:'展唇元音', tip:'嘴角往兩側拉開，發出「一」的聲音。', words:[
-      { h:'交椅',   tl:'kau-[í]',       m:'椅子', e:'🪑', pre:'kau-', ans:'i', post:'' },
-      { h:'小豬',   tl:'sió-t[i]',      m:'小豬', e:'🐷', pre:'sió-t', ans:'i', post:'' },
-      { h:'白米',   tl:'pe̍h-b[í]',      m:'白米', e:'🍚', pre:'pe̍h-b', ans:'i', post:'' }
-    ]},
-    u:   { key:'u',   cat:'基礎母音', tag:'圓唇元音', tip:'嘴唇嘟起來圓圓的，發出「ㄨ」的聲音。', words:[
-      { h:'水牛',   tl:'tsuí-g[û]',     m:'水牛', e:'🐮', pre:'tsuí-g', ans:'u', post:'' },
-      { h:'烏龜',   tl:'oo-k[u]',       m:'烏龜', e:'🐢', pre:'oo-k', ans:'u', post:'' },
-      { h:'讀書',   tl:'tha̍k-ts[u]',    m:'讀書', e:'📖', pre:'tha̍k-ts', ans:'u', post:'' }
-    ]},
-    e:   { key:'e',   cat:'基礎母音', tag:'半開前元音', tip:'嘴巴半開、嘴角微拉（像英語 bed 的 e）。', words:[
-      { h:'布鞋',   tl:'pòo-[ê]',       m:'鞋子', e:'👟', pre:'pòo-', ans:'e', post:'' },
-      { h:'茶米',   tl:'t[ê]-bí',       m:'茶葉', e:'🍵', pre:'t', ans:'e', post:'-bí' },
-      { h:'金雞',   tl:'kim-k[e]',      m:'公雞', e:'🐔', pre:'kim-k', ans:'e', post:'' }
-    ]},
-    o:   { key:'o',   cat:'基礎母音', tag:'半閉圓唇音', tip:'嘴唇微圓，舌位較高（像國語「ㄛ」）。注意 o 和 oo 不同喔！', words:[
-      { h:'蚵仔',   tl:'[ô]-á',         m:'牡蠣', e:'🦪', pre:'', ans:'o', post:'-á' },
-      { h:'菜刀',   tl:'tshài-t[o]',    m:'菜刀', e:'🔪', pre:'tshài-t', ans:'o', post:'' },
-      { h:'雞卵糕', tl:'ke-nn̄g-k[o]',   m:'雞蛋糕', e:'🍰', pre:'ke-nn̄g-k', ans:'o', post:'' }
-    ]},
-    oo:  { key:'oo',  cat:'基礎母音', tag:'開口大圓唇音', tip:'嘴巴張得比 o 更大、聲音更低渾（像英語 law 的母音）。', words:[
-      { h:'烏雲',   tl:'[oo]-hûn',      m:'烏雲', e:'🌧', pre:'', ans:'oo', post:'-hûn' },
-      { h:'老虎',   tl:'lāu-h[óo]',     m:'老虎', e:'🐯', pre:'lāu-h', ans:'oo', post:'' },
-      { h:'馬路',   tl:'bé-l[ōo]',      m:'馬路', e:'🚌', pre:'bé-l', ans:'oo', post:'' }
-    ]},
-
-    // 複合母音 (一)
-    ai:  { key:'ai',  cat:'複合母音（一）', tag:'雙母音', tip:'從 a 自然滑動到 i（像國語「ㄞ」）。', words:[
-      { h:'大海',   tl:'tuā-h[ái]',     m:'大海', e:'🌊', pre:'tuā-h', ans:'ai', post:'' },
-      { h:'獅王',   tl:'s[ai]-ông',     m:'獅子', e:'🦁', pre:'s', ans:'ai', post:'-ông' },
-      { h:'鳳梨',   tl:'ông-l[âi]',     m:'鳳梨', e:'🍍', pre:'ông-l', ans:'ai', post:'' }
-    ]},
-    au:  { key:'au',  cat:'複合母音（一）', tag:'雙母音', tip:'從 a 自然滑動到 u（像國語「ㄠ」）。', words:[
-      { h:'小狗',   tl:'sió-k[áu]',     m:'小狗', e:'🐕', pre:'sió-k', ans:'au', post:'' },
-      { h:'包子',   tl:'p[au]-á',       m:'包子', e:'🥟', pre:'p', ans:'au', post:'-á' },
-      { h:'猴山仔', tl:'k[âu]-suann-á', m:'小猴子', e:'🐒', pre:'k', ans:'au', post:'-suann-á' }
-    ]},
-    ia:  { key:'ia',  cat:'複合母音（一）', tag:'雙母音', tip:'從 i 滑到 a（像國語「ㄧㄚ」）。', words:[
-      { h:'火車',   tl:'hué-tsh[ia]',   m:'火車', e:'🚗', pre:'hué-tsh', ans:'ia', post:'' },
-      { h:'寫字',   tl:'s[iá]-jī',      m:'寫字', e:'📝', pre:'s', ans:'ia', post:'-jī' },
-      { h:'狗蟻',   tl:'káu-h[iā]',     m:'螞蟻', e:'🐜', pre:'káu-h', ans:'ia', post:'' }
-    ]},
-    iu:  { key:'iu',  cat:'複合母音（一）', tag:'雙母音', tip:'從 i 滑到圓唇的 u。', words:[
-      { h:'雙手',   tl:'siang-tsh[iú]', m:'雙手', e:'🖐', pre:'siang-tsh', ans:'iu', post:'' },
-      { h:'氣球',   tl:'phòng-k[iû]',   m:'氣球', e:'🎈', pre:'phòng-k', ans:'iu', post:'' },
-      { h:'秋天',   tl:'tsh[iu]-thinn', m:'秋天', e:'🍂', pre:'tsh', ans:'iu', post:'-thinn' }
-    ]},
-    io:  { key:'io',  cat:'複合母音（一）', tag:'台語特色雙母音', tip:'從 i 滑到微圓唇的 o（國語沒有這個音喔！）。', words:[
-      { h:'芎蕉',   tl:'kin-ts[io]',    m:'香蕉', e:'🍌', pre:'kin-ts', ans:'io', post:'' },
-      { h:'微笑',   tl:'bî-tsh[iò]',    m:'微笑', e:'😄', pre:'bî-tsh', ans:'io', post:'' },
-      { h:'大橋',   tl:'tuā-k[iô]',     m:'大橋', e:'🌉', pre:'tuā-k', ans:'io', post:'' }
-    ]},
-
-    // 複合母音 (二)
-    ua:  { key:'ua',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到 a（像國語「ㄨㄚ」）。', words:[
-      { h:'唱歌',   tl:'tshiùnn-k[ua]', m:'唱歌', e:'🎵', pre:'tshiùnn-k', ans:'ua', post:'' },
-      { h:'白紙',   tl:'pe̍h-ts[uá]',    m:'白紙', e:'📄', pre:'pe̍h-ts', ans:'ua', post:'' },
-      { h:'沙埔',   tl:'s[ua]-poo',     m:'沙灘', e:'🌊', pre:'s', ans:'ua', post:'-poo' }
-    ]},
-    ue:  { key:'ue',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到 e。', words:[
-      { h:'紅花',   tl:'âng-h[ue]',     m:'紅花', e:'🌸', pre:'âng-h', ans:'ue', post:'' },
-      { h:'火車',   tl:'h[ué]-tshia',   m:'火車', e:'🔥', pre:'h', ans:'ue', post:'-tshia' },
-      { h:'茶杯',   tl:'tê-p[ue]',      m:'茶杯', e:'🥤', pre:'tê-p', ans:'ue', post:'' }
-    ]},
-    ui:  { key:'ui',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到清楚的 i。', words:[
-      { h:'喝水',   tl:'lim-ts[uí]',    m:'喝水', e:'💧', pre:'lim-ts', ans:'ui', post:'' },
-      { h:'開門',   tl:'kh[ui]-mn̂g',    m:'開門', e:'🚪', pre:'kh', ans:'ui', post:'-mn̂g' },
-      { h:'花蕊',   tl:'hue-l[uí]',     m:'花朵', e:'🌷', pre:'hue-l', ans:'ui', post:'' }
-    ]},
-    iau: { key:'iau', cat:'複合母音（二）', tag:'三母音', tip:'i + a + u 三個音順暢連在一起（像國語「ㄧㄠ」）。', words:[
-      { h:'貓咪',   tl:'n[iau]-mi',     m:'貓咪', e:'🐈', pre:'n', ans:'iau', post:'-mi' },
-      { h:'鳥仔',   tl:'ts[iáu]-á',     m:'小鳥', e:'🐦', pre:'ts', ans:'iau', post:'-á' },
-      { h:'手錶',   tl:'tshiú-p[iáu]',  m:'手錶', e:'🕰', pre:'tshiú-p', ans:'iau', post:'' }
-    ]},
-    uai: { key:'uai', cat:'複合母音（二）', tag:'三母音', tip:'u + a + i 三個音連在一起（像國語「ㄨㄞ」）。', words:[
-      { h:'乖巧',   tl:'k[uai]-khiáu',  m:'乖巧', e:'😇', pre:'k', ans:'uai', post:'-khiáu' },
-      { h:'真快',   tl:'tsin-kh[uài]',  m:'很快', e:'🔥', pre:'tsin-kh', ans:'uai', post:'' },
-      { h:'歪斜',   tl:'[uai]-tshuah',  m:'歪斜', e:'📐', pre:'', ans:'uai', post:'-tshuah' }
-    ]},
-
-    // 鼻化韻
-    ann:  { key:'ann',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 a 的時候，讓氣流同時從鼻孔出來（nn 代表鼻化記號）。', words:[
-      { h:'新衫',   tl:'sin-s[ann]',    m:'新衣服', e:'👕', pre:'sin-s', ans:'ann', post:'' },
-      { h:'三粒',   tl:'s[ann]-lia̍p',   m:'三顆',   e:'🍡', pre:'s', ans:'ann', post:'-lia̍p' }
-    ]},
-    inn:  { key:'inn',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 i 的時候，讓氣流同時從鼻孔出來。', words:[
-      { h:'甜糖',   tl:'t[inn]-thn̂g',   m:'甜糖果', e:'🍭', pre:'t', ans:'inn', post:'-thn̂g' },
-      { h:'天頂',   tl:'th[inn]-tíng',  m:'天空',   e:'🌈', pre:'th', ans:'inn', post:'-tíng' }
-    ]},
-    enn:  { key:'enn',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 e 的時候，讓氣流同時從鼻孔出來。', words:[
-      { h:'天星',   tl:'thinn-tsh[enn]',m:'星星',   e:'⭐', pre:'thinn-tsh', ans:'enn', post:'' },
-      { h:'紅嬰仔', tl:'âng-[enn]-á',   m:'小嬰兒', e:'👶', pre:'âng-', ans:'enn', post:'-á' }
-    ]},
-    iann: { key:'iann', cat:'鼻化母音', tag:'鼻化韻', tip:'發 ia 的時候，讓氣流同時從鼻孔出來。', words:[
-      { h:'大餅',   tl:'tuā-p[iánn]',   m:'大餅乾', e:'🍪', pre:'tuā-p', ans:'iann', post:'' },
-      { h:'聽歌',   tl:'th[iann]-kua',  m:'聽歌',   e:'🎧', pre:'th', ans:'iann', post:'-kua' }
-    ]},
-    uann: { key:'uann', cat:'鼻化母音', tag:'鼻化韻', tip:'發 ua 的時候，讓氣流同時從鼻孔出來。', words:[
-      { h:'高山',   tl:'ko-s[uann]',    m:'高山',   e:'🌋', pre:'ko-s', ans:'uann', post:'' },
-      { h:'飯碗',   tl:'pn̄g-[uánn]',    m:'飯碗',   e:'🥣', pre:'pn̄g-', ans:'uann', post:'' }
-    ]},
-
-    // 入聲尾音
-    '-p': { key:'-p', cat:'入聲尾音', tag:'雙唇急收音', tip:'發完母音後，雙唇立刻閉起來收音，短促不放開。', words:[
-      { h:'十全',   tl:'tsa̍[p]-tsuân',  m:'數字十', e:'🎯', pre:'tsa̍', ans:'p', post:'-tsuân' },
-      { h:'盒仔',   tl:'a̍[p]-á',        m:'小盒子', e:'📦', pre:'a̍', ans:'p', post:'-á' }
-    ]},
-    '-t': { key:'-t', cat:'入聲尾音', tag:'舌尖急收音', tip:'發完母音後，舌尖立刻頂住上齒齦收住聲音。', words:[
-      { h:'鉛筆',   tl:'iân-pi[t]',     m:'鉛筆',   e:'📏', pre:'iân-pi', ans:'t', post:'' },
-      { h:'日頭',   tl:'ji̍[t]-thâu',    m:'太陽',   e:'🌞', pre:'ji̍', ans:'t', post:'-thâu' }
-    ]},
-    '-k': { key:'-k', cat:'入聲尾音', tag:'舌根急收音', tip:'發完母音後，舌根立刻頂住上顎收住聲音。', words:[
-      { h:'梅鹿',   tl:'muî-lo̍[k]',     m:'小鹿',   e:'🦌', pre:'muî-lo̍', ans:'k', post:'' },
-      { h:'竹仔',   tl:'ti[k]-á',       m:'竹子',   e:'🎋', pre:'ti', ans:'k', post:'-á' }
-    ]},
-    '-h': { key:'-h', cat:'入聲尾音', tag:'喉塞急收音', tip:'喉嚨突然收住氣流，聲音短促停下來。', words:[
-      { h:'鴨仔',   tl:'a[h]-á',        m:'小鴨',   e:'🦆', pre:'a', ans:'h', post:'-á' },
-      { h:'樹葉',   tl:'tshiū-hio̍[h]',  m:'樹葉',   e:'🍃', pre:'tshiū-hio̍', ans:'h', post:'' }
-    ]}
+    "p": { key:"p", cat:"子音（雙唇音）", tag:"不送氣清音", tip:"雙唇緊閉再輕輕放開，不噴氣（像「包仔 pau-á」開頭的音）。", words:[
+      { h:"包仔", tl:"[p]au-á", m:"包子", e:"🥟", pre:"", ans:"p", post:"au-á", aid:"1457" },
+      { h:"飛鳥", tl:"[p]ue-tsiáu", m:"飛鳥", e:"🐦", pre:"", ans:"p", post:"ue-tsiáu", aid:"5652" },
+      { h:"杯仔", tl:"[p]ue-á", m:"杯子", e:"🥤", pre:"", ans:"p", post:"ue-á", aid:"4217" }
+    ] },
+    "ph": { key:"ph", cat:"子音（雙唇音）", tag:"送氣清音", tip:"雙唇合起來再用力噴氣出來，手放嘴前會感覺到風（像「蘋果 phông-kó」開頭的音）。", words:[
+      { h:"蘋果", tl:"[ph]ông-kó", m:"蘋果", e:"🍎", pre:"", ans:"ph", post:"ông-kó", aid:"13055" },
+      { h:"批信", tl:"[ph]ue-sìn", m:"信件", e:"💌", pre:"", ans:"ph", post:"ue-sìn", aid:"3249" },
+      { h:"膨椅", tl:"[ph]òng-í", m:"沙發", e:"🛋", pre:"", ans:"ph", post:"òng-í", aid:"11909" }
+    ] },
+    "b": { key:"b", cat:"子音（雙唇音）", tag:"台語特有濁音", tip:"雙唇合起來，喉嚨同時震動發聲（像「帽仔 bō-á」、「馬仔 bé-á」開頭的濁音）。", words:[
+      { h:"帽仔", tl:"[b]ō-á", m:"帽子", e:"🧢", pre:"", ans:"b", post:"ō-á", aid:"8352" },
+      { h:"馬仔", tl:"[b]é-á", m:"小馬", e:"🐴", pre:"", ans:"b", post:"é-á", aid:"6836" },
+      { h:"目睭", tl:"[b]a̍k-tsiu", m:"眼睛", e:"👀", pre:"", ans:"b", post:"a̍k-tsiu", aid:"1985" }
+    ] },
+    "m": { key:"m", cat:"子音（雙唇音）", tag:"雙唇鼻音", tip:"雙唇閉起來，讓聲音從鼻孔哼出來（像「麵線 mī-suànn」開頭的鼻音）。", words:[
+      { h:"麵線", tl:"[m]ī-suànn", m:"麵線", e:"🍜", pre:"", ans:"m", post:"ī-suànn", aid:"13109" },
+      { h:"門扇", tl:"[m]n̂g-sìnn", m:"門扇", e:"🚪", pre:"", ans:"m", post:"n̂g-sìnn", aid:"4599" },
+      { h:"梅仔", tl:"[m]uê-á", m:"梅子", e:"🍑", pre:"", ans:"m", post:"uê-á", aid:"7471" }
+    ] },
+    "t": { key:"t", cat:"子音（舌尖音）", tag:"不送氣清音", tip:"舌尖頂住上牙齒後方再放開，不噴氣（像「茶杯 tê-pue」開頭的音）。", words:[
+      { h:"茶杯", tl:"[t]ê-pue", m:"茶杯", e:"🍵", pre:"", ans:"t", post:"ê-pue", aid:"6589" },
+      { h:"豬", tl:"[t]i", m:"小豬", e:"🐷", pre:"", ans:"t", post:"i", aid:"11418" },
+      { h:"桌仔", tl:"[t]oh-á", m:"桌子", e:"🪑", pre:"", ans:"t", post:"oh-á", aid:"6122" }
+    ] },
+    "th": { key:"th", cat:"子音（舌尖音）", tag:"送氣清音", tip:"舌尖頂住上牙齦再用力噴氣（像「糖仔 thn̂g-á」、「兔仔 thòo-á」開頭的音）。", words:[
+      { h:"糖仔", tl:"[th]n̂g-á", m:"糖果", e:"🍬", pre:"", ans:"th", post:"n̂g-á", aid:"14536" },
+      { h:"兔仔", tl:"[th]òo-á", m:"兔子", e:"🐰", pre:"", ans:"th", post:"òo-á", aid:"3634" },
+      { h:"天頂", tl:"[th]inn-tíng", m:"天空", e:"🌈", pre:"", ans:"th", post:"inn-tíng", aid:"1072" }
+    ] },
+    "n": { key:"n", cat:"子音（舌尖音）", tag:"舌尖鼻音", tip:"舌尖頂住上牙齦，聲音從鼻孔出來（像「貓 niau」開頭的鼻音）。", words:[
+      { h:"貓", tl:"[n]iau", m:"貓咪", e:"🐱", pre:"", ans:"n", post:"iau", aid:"11939" },
+      { h:"籃仔", tl:"[n]â-á", m:"籃子", e:"🧺", pre:"", ans:"n", post:"â-á", aid:"13025" },
+      { h:"過年", tl:"kuè-[n]î", m:"過年", e:"🧧", pre:"kuè-", ans:"n", post:"î", aid:"10211" }
+    ] },
+    "l": { key:"l", cat:"子音（舌尖音）", tag:"舌尖邊音", tip:"舌尖輕輕彈一下上牙齦（像「露螺 lōo-lê」、「鹿仔 lo̍k-á」開頭的音）。", words:[
+      { h:"露螺", tl:"[l]ōo-lê", m:"蝸牛", e:"🐌", pre:"", ans:"l", post:"ōo-lê", aid:"13198" },
+      { h:"鹿仔", tl:"[l]o̍k-á", m:"小鹿", e:"🦌", pre:"", ans:"l", post:"o̍k-á", aid:"8119" },
+      { h:"火車路", tl:"hué-tshia-[l]ōo", m:"鐵路", e:"🚂", pre:"hué-tshia-", ans:"l", post:"ōo", aid:"1256" }
+    ] },
+    "k": { key:"k", cat:"子音（舌根與喉音）", tag:"不送氣清音", tip:"舌根頂住軟顎再放開，不噴氣（像「狗仔 káu-á」、「雞 ke」開頭的音）。", words:[
+      { h:"狗仔", tl:"[k]áu-á", m:"小狗", e:"🐶", pre:"", ans:"k", post:"áu-á", aid:"4353" },
+      { h:"雞", tl:"[k]e", m:"公雞", e:"🐓", pre:"", ans:"k", post:"e", aid:"12692" },
+      { h:"烏龜", tl:"oo-[k]u", m:"烏龜", e:"🐢", pre:"oo-", ans:"k", post:"u", aid:"6345" }
+    ] },
+    "kh": { key:"kh", cat:"子音（舌根與喉音）", tag:"送氣清音", tip:"舌根頂住軟顎再用力噴氣（像「褲 khòo」、「虹 khīng」開頭的音）。", words:[
+      { h:"褲", tl:"[kh]òo", m:"褲子", e:"👖", pre:"", ans:"kh", post:"òo", aid:"11920" },
+      { h:"虹", tl:"[kh]īng", m:"彩虹", e:"🌈", pre:"", ans:"kh", post:"īng", aid:"5474" },
+      { h:"跤踏車", tl:"[kh]a-ta̍h-tshia", m:"腳踏車", e:"🚲", pre:"", ans:"kh", post:"a-ta̍h-tshia", aid:"10159" }
+    ] },
+    "g": { key:"g", cat:"子音（舌根與喉音）", tag:"台語特有濁音", tip:"舌根頂住上顎，喉嚨震動發出濁音（像「牛 gû」、「鵝 gô」開頭的音）。", words:[
+      { h:"水牛", tl:"tsuí-[g]û", m:"水牛", e:"🐮", pre:"tsuí-", ans:"g", post:"û", aid:"873" },
+      { h:"鵝", tl:"[g]ô", m:"白鵝", e:"🦢", pre:"", ans:"g", post:"ô", aid:"12794" },
+      { h:"月娘", tl:"[g]ue̍h-niû", m:"月亮", e:"🌙", pre:"", ans:"g", post:"ue̍h-niû", aid:"1022" }
+    ] },
+    "ng": { key:"ng", cat:"子音（舌根與喉音）", tag:"舌根鼻音", tip:"舌根抵住軟顎，讓聲音從鼻子哼出來（像「五彩 ngóo-tshái」開頭的鼻音）。", words:[
+      { h:"五彩", tl:"[ng]óo-tshái", m:"五彩繽紛", e:"🎨", pre:"", ans:"ng", post:"óo-tshái", aid:"717" },
+      { h:"硬", tl:"[ng]ē", m:"堅硬", e:"🪨", pre:"", ans:"ng", post:"ē", aid:"8795" },
+      { h:"迎鬧熱", tl:"[ng]iâ-lāu-jia̍t", m:"迎神慶典", e:"🎉", pre:"", ans:"ng", post:"iâ-lāu-jia̍t", aid:"4658" }
+    ] },
+    "h": { key:"h", cat:"子音（舌根與喉音）", tag:"喉擦音", tip:"從喉嚨輕輕呵氣出來（像「花 hue」、「虎 hóo」開頭的音）。", words:[
+      { h:"花", tl:"[h]ue", m:"花朵", e:"🌺", pre:"", ans:"h", post:"ue", aid:"4442" },
+      { h:"金魚", tl:"kim-[h]î", m:"金魚", e:"🐟", pre:"kim-", ans:"h", post:"î", aid:"4627" },
+      { h:"虎", tl:"[h]óo", m:"老虎", e:"🐯", pre:"", ans:"h", post:"óo", aid:"4498" }
+    ] },
+    "ts": { key:"ts", cat:"子音（齒音）", tag:"不送氣塞擦音", tip:"舌尖頂住齒齦再微開，不噴氣（像「鳥仔 tsiáu-á」、「水 tsuí」開頭的音）。", words:[
+      { h:"鳥仔", tl:"[ts]iáu-á", m:"小鳥", e:"🐦", pre:"", ans:"ts", post:"iáu-á", aid:"8118" },
+      { h:"甘蔗", tl:"kam-[ts]ià", m:"甘蔗", e:"🎋", pre:"kam-", ans:"ts", post:"ià", aid:"2014" },
+      { h:"水", tl:"[ts]uí", m:"茶水", e:"💧", pre:"", ans:"ts", post:"uí", aid:"823" }
+    ] },
+    "tsh": { key:"tsh", cat:"子音（齒音）", tag:"送氣塞擦音", tip:"跟 ts 同位置，但要用力噴氣（像「火車 hué-tshia」、「青菜 tshenn-tshài」的 tsh）。", words:[
+      { h:"火車", tl:"hué-[tsh]ia", m:"火車", e:"🚂", pre:"hué-", ans:"tsh", post:"ia", aid:"1252" },
+      { h:"青菜", tl:"tshenn-[tsh]ài", m:"青菜", e:"🥬", pre:"tshenn-", ans:"tsh", post:"ài", aid:"4633" },
+      { h:"樹仔", tl:"[tsh]iū-á", m:"樹木", e:"🌳", pre:"", ans:"tsh", post:"iū-á", aid:"11740" }
+    ] },
+    "s": { key:"s", cat:"子音（齒音）", tag:"清擦音", tip:"舌尖靠近齒齦留縫隙摩擦出氣（像「西瓜 si-kue」、「獅 sai」開頭的音）。", words:[
+      { h:"西瓜", tl:"[s]i-kue", m:"西瓜", e:"🍉", pre:"", ans:"s", post:"i-kue", aid:"2852" },
+      { h:"獅", tl:"[s]ai", m:"獅子", e:"🦁", pre:"", ans:"s", post:"ai", aid:"9751" },
+      { h:"山", tl:"[s]uann", m:"山岳", e:"🌋", pre:"", ans:"s", post:"uann", aid:"206" }
+    ] },
+    "j": { key:"j", cat:"子音（齒音）", tag:"台語特有濁音", tip:"舌尖摩擦並讓喉嚨震動（像「日頭 ji̍t-thâu」、「寫字 siá-jī」的 j）。", words:[
+      { h:"日頭", tl:"[j]i̍t-thâu", m:"太陽", e:"🌞", pre:"", ans:"j", post:"i̍t-thâu", aid:"1178" },
+      { h:"寫字", tl:"siá-[j]ī", m:"寫字", e:"📝", pre:"siá-", ans:"j", post:"ī", aid:"11063" },
+      { h:"熱天", tl:"[j]ua̍h-thinn", m:"夏天", e:"🔥", pre:"", ans:"j", post:"ua̍h-thinn", aid:"11246" }
+    ] },
+    "a": { key:"a", cat:"基礎母音", tag:"大口元音", tip:"嘴巴自然張大發出「a」的聲音（像「鴨仔 ah-á」、「阿媽 a-má」）。", words:[
+      { h:"鴨仔", tl:"[a]h-á", m:"小鴨", e:"🦆", pre:"", ans:"a", post:"h-á", aid:"12129" },
+      { h:"阿媽", tl:"a-m[á]", m:"奶奶", e:"👵", pre:"a-m", ans:"a", post:"", aid:"4637" },
+      { h:"跤踏車", tl:"kh[a]-ta̍h-tshia", m:"腳踏車", e:"🚲", pre:"kh", ans:"a", post:"-ta̍h-tshia", aid:"10159" }
+    ] },
+    "i": { key:"i", cat:"基礎母音", tag:"展唇元音", tip:"嘴角往兩側拉開，發出「i」的聲音（像「椅仔 í-á」、「米 bí」）。", words:[
+      { h:"椅仔", tl:"[í]-á", m:"椅子", e:"🪑", pre:"", ans:"i", post:"-á", aid:"8517" },
+      { h:"米", tl:"b[í]", m:"白米", e:"🍚", pre:"b", ans:"i", post:"", aid:"2599" },
+      { h:"交椅", tl:"kau-[í]", m:"扶手椅", e:"🪑", pre:"kau-", ans:"i", post:"", aid:"2093" }
+    ] },
+    "u": { key:"u", cat:"基礎母音", tag:"圓唇元音", tip:"嘴唇嘟起來圓圓的，發出「u」的聲音（像「水牛 tsuí-gû」、「烏龜 oo-ku」）。", words:[
+      { h:"水牛", tl:"tsuí-g[û]", m:"水牛", e:"🐮", pre:"tsuí-g", ans:"u", post:"", aid:"873" },
+      { h:"烏龜", tl:"oo-k[u]", m:"烏龜", e:"🐢", pre:"oo-k", ans:"u", post:"", aid:"6345" },
+      { h:"厝", tl:"tsh[ù]", m:"房屋", e:"🏠", pre:"tsh", ans:"u", post:"", aid:"5810" }
+    ] },
+    "e": { key:"e", cat:"基礎母音", tag:"半開前元音", tip:"嘴巴半開、嘴角微拉（像「布鞋 pòo-ê」、「茶米 tê-bí」）。", words:[
+      { h:"布鞋", tl:"pòo-[ê]", m:"布鞋", e:"👟", pre:"pòo-", ans:"e", post:"", aid:"1817" },
+      { h:"茶米", tl:"t[ê]-bí", m:"茶葉", e:"🍵", pre:"t", ans:"e", post:"-bí", aid:"6580" },
+      { h:"雞", tl:"k[e]", m:"公雞", e:"🐔", pre:"k", ans:"e", post:"", aid:"12692" }
+    ] },
+    "o": { key:"o", cat:"基礎母音", tag:"半閉圓唇音", tip:"嘴唇微圓，舌位較高（像「蚵仔 ô-á」、「菜刀 tshài-to」）。注意 o 和 oo 不同喔！", words:[
+      { h:"蚵仔", tl:"[ô]-á", m:"牡蠣", e:"🦪", pre:"", ans:"o", post:"-á", aid:"7845" },
+      { h:"菜刀", tl:"tshài-t[o]", m:"菜刀", e:"🔪", pre:"tshài-t", ans:"o", post:"", aid:"8958" },
+      { h:"雞卵糕", tl:"ke-nn̄g-k[o]", m:"雞蛋糕", e:"🍰", pre:"ke-nn̄g-k", ans:"o", post:"", aid:"12717" }
+    ] },
+    "oo": { key:"oo", cat:"基礎母音", tag:"開口大圓唇音", tip:"嘴巴張得比 o 更大、聲音更低渾（像「烏雲 oo-hûn」、「虎 hóo」）。", words:[
+      { h:"烏雲", tl:"[oo]-hûn", m:"烏雲", e:"🌧", pre:"", ans:"oo", post:"-hûn", aid:"6317" },
+      { h:"虎", tl:"h[óo]", m:"老虎", e:"🐯", pre:"h", ans:"oo", post:"", aid:"4498" },
+      { h:"露螺", tl:"l[ōo]-lê", m:"蝸牛", e:"🐌", pre:"l", ans:"oo", post:"-lê", aid:"13198" }
+    ] },
+    "ai": { key:"ai", cat:"複合母音（一）", tag:"雙母音", tip:"從 a 自然滑動到 i（像「海 hái」、「王梨 ông-lâi」）。", words:[
+      { h:"海", tl:"h[ái]", m:"大海", e:"🌊", pre:"h", ans:"ai", post:"", aid:"6176" },
+      { h:"獅", tl:"s[ai]", m:"獅子", e:"🦁", pre:"s", ans:"ai", post:"", aid:"9751" },
+      { h:"王梨", tl:"ông-l[âi]", m:"鳳梨", e:"🍍", pre:"ông-l", ans:"ai", post:"", aid:"1270" }
+    ] },
+    "au": { key:"au", cat:"複合母音（一）", tag:"雙母音", tip:"從 a 自然滑動到 u（像「狗仔 káu-á」、「包仔 pau-á」）。", words:[
+      { h:"狗仔", tl:"k[áu]-á", m:"小狗", e:"🐕", pre:"k", ans:"au", post:"-á", aid:"4353" },
+      { h:"包仔", tl:"p[au]-á", m:"包子", e:"🥟", pre:"p", ans:"au", post:"-á", aid:"1457" },
+      { h:"猴山仔", tl:"k[âu]-san--á", m:"小猴子", e:"🐒", pre:"k", ans:"au", post:"-san--á", aid:"8602" }
+    ] },
+    "ia": { key:"ia", cat:"複合母音（一）", tag:"雙母音", tip:"從 i 滑到 a（像「火車 hué-tshia」、「寫字 siá-jī」）。", words:[
+      { h:"火車", tl:"hué-tsh[ia]", m:"火車", e:"🚂", pre:"hué-tsh", ans:"ia", post:"", aid:"1252" },
+      { h:"寫字", tl:"s[iá]-jī", m:"寫字", e:"📝", pre:"s", ans:"ia", post:"-jī", aid:"11063" },
+      { h:"狗蟻", tl:"káu-h[iā]", m:"螞蟻", e:"🐜", pre:"káu-h", ans:"ia", post:"", aid:"4383" }
+    ] },
+    "iu": { key:"iu", cat:"複合母音（一）", tag:"雙母音", tip:"從 i 滑到圓唇的 u（像「雙手 siang-tshiú」、「樹仔 tshiū-á」）。", words:[
+      { h:"雙手", tl:"siang-tsh[iú]", m:"雙手", e:"🖐", pre:"siang-tsh", ans:"iu", post:"", aid:"12697" },
+      { h:"樹仔", tl:"tsh[iū]-á", m:"樹木", e:"🌳", pre:"tsh", ans:"iu", post:"-á", aid:"11740" },
+      { h:"月娘", tl:"gue̍h-n[iû]", m:"月亮", e:"🌙", pre:"gue̍h-n", ans:"iu", post:"", aid:"1022" }
+    ] },
+    "io": { key:"io", cat:"複合母音（一）", tag:"台語特色雙母音", tip:"從 i 滑到微圓唇的 o（像「弓蕉 king-tsio」、「橋 kiô」）。", words:[
+      { h:"弓蕉", tl:"king-ts[io]", m:"香蕉", e:"🍌", pre:"king-ts", ans:"io", post:"", aid:"538" },
+      { h:"笑容", tl:"tsh[iò]-iông", m:"笑容", e:"😄", pre:"tsh", ans:"io", post:"-iông", aid:"6468" },
+      { h:"橋", tl:"k[iô]", m:"大橋", e:"🌉", pre:"k", ans:"io", post:"", aid:"11733" }
+    ] },
+    "ua": { key:"ua", cat:"複合母音（二）", tag:"雙母音", tip:"從 u 滑到 a（像「歌仔 kua-á」、「紙 tsuá」、「沙埔 sua-poo」）。", words:[
+      { h:"歌仔", tl:"k[ua]-á", m:"歌謠", e:"🎵", pre:"k", ans:"ua", post:"-á", aid:"10609" },
+      { h:"紙", tl:"ts[uá]", m:"白紙", e:"📄", pre:"ts", ans:"ua", post:"", aid:"6499" },
+      { h:"沙埔", tl:"s[ua]-poo", m:"沙灘", e:"🌊", pre:"s", ans:"ua", post:"-poo", aid:"3324" }
+    ] },
+    "ue": { key:"ue", cat:"複合母音（二）", tag:"雙母音", tip:"從 u 滑到 e（像「花蕊 hue-luí」、「火車 hué-tshia」、「茶杯 tê-pue」）。", words:[
+      { h:"花蕊", tl:"h[ue]-luí", m:"花朵", e:"🌸", pre:"h", ans:"ue", post:"-luí", aid:"4487" },
+      { h:"火車", tl:"h[ué]-tshia", m:"火車", e:"🚂", pre:"h", ans:"ue", post:"-tshia", aid:"1252" },
+      { h:"茶杯", tl:"tê-p[ue]", m:"茶杯", e:"🍵", pre:"tê-p", ans:"ue", post:"", aid:"6589" }
+    ] },
+    "ui": { key:"ui", cat:"複合母音（二）", tag:"雙母音", tip:"從 u 滑到清楚的 i（像「水 tsuí」、「花蕊 hue-luí」）。", words:[
+      { h:"水", tl:"ts[uí]", m:"茶水", e:"💧", pre:"ts", ans:"ui", post:"", aid:"823" },
+      { h:"花蕊", tl:"hue-l[uí]", m:"花朵", e:"🌷", pre:"hue-l", ans:"ui", post:"", aid:"4487" },
+      { h:"喙齒", tl:"tsh[uì]-khí", m:"牙齒", e:"🦷", pre:"tsh", ans:"ui", post:"-khí", aid:"8263" }
+    ] },
+    "iau": { key:"iau", cat:"複合母音（二）", tag:"三母音", tip:"i + a + u 三個音順暢連在一起（像「貓 niau」、「鳥仔 tsiáu-á」）。", words:[
+      { h:"貓", tl:"n[iau]", m:"貓咪", e:"🐈", pre:"n", ans:"iau", post:"", aid:"11939" },
+      { h:"鳥仔", tl:"ts[iáu]-á", m:"小鳥", e:"🐦", pre:"ts", ans:"iau", post:"-á", aid:"8118" },
+      { h:"紙條", tl:"tsuá-t[iâu]", m:"紙條", e:"📜", pre:"tsuá-t", ans:"iau", post:"", aid:"6535" }
+    ] },
+    "uai": { key:"uai", cat:"複合母音（二）", tag:"三母音", tip:"u + a + i 三個音連在一起（像「乖巧 kuai-khá」、「歪斜 uai-tshua̍h」）。", words:[
+      { h:"乖巧", tl:"k[uai]-khá", m:"乖巧", e:"😇", pre:"k", ans:"uai", post:"-khá", aid:"3554" },
+      { h:"乖", tl:"k[uai]", m:"乖巧", e:"🌟", pre:"k", ans:"uai", post:"", aid:"3534" },
+      { h:"歪斜", tl:"[uai]-tshua̍h", m:"歪斜", e:"📐", pre:"", ans:"uai", post:"-tshua̍h", aid:"5169" }
+    ] },
+    "ann": { key:"ann", cat:"鼻化母音", tag:"鼻化韻", tip:"發 a 的時候，讓氣流同時從鼻孔出來（nn 代表鼻化記號，像「衫 sann」、「三 sann」）。", words:[
+      { h:"衫", tl:"s[ann]", m:"衣服", e:"👕", pre:"s", ans:"ann", post:"", aid:"5508" },
+      { h:"三", tl:"s[ann]", m:"數字三", e:"🍡", pre:"s", ans:"ann", post:"", aid:"171" },
+      { h:"膽", tl:"t[ánn]", m:"膽量", e:"🦁", pre:"t", ans:"ann", post:"", aid:"12329" }
+    ] },
+    "inn": { key:"inn", cat:"鼻化母音", tag:"鼻化韻", tip:"發 i 的時候，讓氣流同時從鼻孔出來（像「甜 tinn」、「天頂 thinn-tíng」）。", words:[
+      { h:"甜", tl:"t[inn]", m:"甘甜", e:"🍭", pre:"t", ans:"inn", post:"", aid:"7655" },
+      { h:"天頂", tl:"th[inn]-tíng", m:"天空", e:"🌈", pre:"th", ans:"inn", post:"-tíng", aid:"1072" },
+      { h:"錢", tl:"ts[înn]", m:"錢幣", e:"🪙", pre:"ts", ans:"inn", post:"", aid:"12022" }
+    ] },
+    "enn": { key:"enn", cat:"鼻化母音", tag:"鼻化韻", tip:"發 e 的時候，讓氣流同時從鼻孔出來（像「星 tshenn」、「紅嬰仔 âng-enn-á」）。", words:[
+      { h:"星", tl:"tsh[enn]", m:"星星", e:"⭐", pre:"tsh", ans:"enn", post:"", aid:"5010" },
+      { h:"紅嬰仔", tl:"âng-[enn]-á", m:"小嬰兒", e:"👶", pre:"âng-", ans:"enn", post:"-á", aid:"5452" },
+      { h:"青菜", tl:"tsh[enn]-tshài", m:"青菜", e:"🥬", pre:"tsh", ans:"enn", post:"-tshài", aid:"4633" }
+    ] },
+    "iann": { key:"iann", cat:"鼻化母音", tag:"鼻化韻", tip:"發 ia 的時候，讓氣流同時從鼻孔出來（像「大餅 tuā-piánn」、「聽 thiann」）。", words:[
+      { h:"大餅", tl:"tuā-p[iánn]", m:"大餅", e:"🍪", pre:"tuā-p", ans:"iann", post:"", aid:"515" },
+      { h:"餅", tl:"p[iánn]", m:"餅乾", e:"🍘", pre:"p", ans:"iann", post:"", aid:"10951" },
+      { h:"聽", tl:"th[iann]", m:"傾聽", e:"🎧", pre:"th", ans:"iann", post:"", aid:"13260" }
+    ] },
+    "uann": { key:"uann", cat:"鼻化母音", tag:"鼻化韻", tip:"發 ua 的時候，讓氣流同時從鼻孔出來（像「山 suann」、「飯碗 pn̄g-uánn」）。", words:[
+      { h:"山", tl:"s[uann]", m:"山岳", e:"🌋", pre:"s", ans:"uann", post:"", aid:"206" },
+      { h:"飯碗", tl:"pn̄g-[uánn]", m:"飯碗", e:"🥣", pre:"pn̄g-", ans:"uann", post:"", aid:"9303" },
+      { h:"雨傘", tl:"hōo-s[uànn]", m:"雨傘", e:"☂", pre:"hōo-s", ans:"uann", post:"", aid:"4628" }
+    ] },
+    "-p": { key:"-p", cat:"入聲尾音", tag:"雙唇急收音", tip:"發完母音後，雙唇立刻閉起來收音，短促不放開（像「十 tsa̍p」、「盒仔 a̍p-á」）。", words:[
+      { h:"十", tl:"tsa̍[p]", m:"數字十", e:"🎯", pre:"tsa̍", ans:"p", post:"", aid:"61" },
+      { h:"盒仔", tl:"a̍[p]-á", m:"小盒子", e:"📦", pre:"a̍", ans:"p", post:"-á", aid:"7672" },
+      { h:"粒", tl:"lia̍[p]", m:"一顆粒", e:"🔮", pre:"lia̍", ans:"p", post:"", aid:"7738" }
+    ] },
+    "-t": { key:"-t", cat:"入聲尾音", tag:"舌尖急收音", tip:"發完母音後，舌尖立刻頂住上齒齦收住聲音（像「鉛筆 iân-pit」、「日頭 ji̍t-thâu」）。", words:[
+      { h:"鉛筆", tl:"iân-pi[t]", m:"鉛筆", e:"📏", pre:"iân-pi", ans:"t", post:"", aid:"10306" },
+      { h:"日頭", tl:"ji̍[t]-thâu", m:"太陽", e:"🌞", pre:"ji̍", ans:"t", post:"-thâu", aid:"1178" },
+      { h:"一", tl:"tsi̍[t]", m:"數字一", e:"🥇", pre:"tsi̍", ans:"t", post:"", aid:"1" }
+    ] },
+    "-k": { key:"-k", cat:"入聲尾音", tag:"舌根急收音", tip:"發完母音後，舌根立刻頂住上顎收住聲音（像「鹿仔 lo̍k-á」、「竹仔 tik-á」）。", words:[
+      { h:"鹿仔", tl:"lo̍[k]-á", m:"小鹿", e:"🦌", pre:"lo̍", ans:"k", post:"-á", aid:"8119" },
+      { h:"竹仔", tl:"ti[k]-á", m:"竹子", e:"🎋", pre:"ti", ans:"k", post:"-á", aid:"2641" },
+      { h:"讀冊", tl:"tha̍[k]-tsheh", m:"讀書", e:"📖", pre:"tha̍", ans:"k", post:"-tsheh", aid:"13266" }
+    ] },
+    "-h": { key:"-h", cat:"入聲尾音", tag:"喉塞急收音", tip:"喉嚨突然收住氣流，聲音短促停下來（像「鴨仔 ah-á」、「葉仔 hio̍h-á」）。", words:[
+      { h:"鴨仔", tl:"a[h]-á", m:"小鴨", e:"🦆", pre:"a", ans:"h", post:"-á", aid:"12129" },
+      { h:"葉仔", tl:"hio̍[h]-á", m:"樹葉", e:"🍃", pre:"hio̍", ans:"h", post:"-á", aid:"10009" },
+      { h:"冊", tl:"tshe[h]", m:"書本", e:"📚", pre:"tshe", ans:"h", post:"", aid:"1322" }
+    ] },
   };
 
   // 10 個學習單元關卡
@@ -1161,32 +1153,59 @@ html, body {
     win:   () => [523, 659, 784, 659, 784, 1046].forEach((f, i) => playTone(f, 0.18, { type: 'triangle', vol: 0.14, delay: i * 0.11 }))
   };
 
+  let activeVoiceAudio = null;
+  const KIPSUTIAN_CDN = 'https://chhoetaigi.github.io/KipSutianDataMirror/public/20260503-2330/imtong/sutiau';
+
+  function playSynthFallback(tlStr) {
+    if (STATE.muted || !audioCtx) return;
+    let fStart = 290, fEnd = 290, dur = 0.32;
+    if (/[áéíóú]/.test(tlStr)) { fStart = 350; fEnd = 185; }
+    else if (/[àèìòù]/.test(tlStr)) { fStart = 215; fEnd = 140; }
+    else if (/[âêîôû]/.test(tlStr)) { fStart = 180; fEnd = 320; dur = 0.36; }
+    else if (/[āēīōū]/.test(tlStr)) { fStart = 240; fEnd = 240; }
+    else if (/[ptkh]\]?$/i.test(tlStr)) { fStart = 260; fEnd = 240; dur = 0.16; }
+    playTone(fStart, dur, { type: 'triangle', slide: fEnd, vol: 0.16 });
+  }
+
   function speakPhonetic(key, wordObj) {
+    if (STATE.muted) return;
     initAudio();
     const p = PHONETICS[key];
     const w = wordObj || (p && p.words[0]);
-    // 合成清脆的台語聲調示範音 + 瀏覽器語音輔助
-    if (!STATE.muted && audioCtx) {
-      let fStart = 290, fEnd = 290, dur = 0.34;
-      const tlStr = w ? w.tl : key;
-      if (/[áéíóú]/.test(tlStr)) { fStart = 350; fEnd = 185; }
-      else if (/[àèìòù]/.test(tlStr)) { fStart = 215; fEnd = 140; }
-      else if (/[âêîôû]/.test(tlStr)) { fStart = 180; fEnd = 320; dur = 0.38; }
-      else if (/[āēīōū]/.test(tlStr)) { fStart = 240; fEnd = 240; }
-      else if (/[ptkh]\]?$/i.test(tlStr)) { fStart = 260; fEnd = 240; dur = 0.16; }
-
-      playTone(fStart, dur, { type: 'triangle', slide: fEnd, vol: 0.18 });
-      playTone(fStart * 2, dur * 0.9, { type: 'sine', slide: fEnd * 2, vol: 0.07 });
+    if (!w || !w.aid) {
+      playSynthFallback(w ? w.tl : key);
+      return;
     }
-    try {
-      if (window.speechSynthesis && w && w.h && !STATE.muted) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(w.h);
-        u.lang = 'zh-TW';
-        u.rate = 0.85;
-        window.speechSynthesis.speak(u);
+
+    if (activeVoiceAudio) {
+      try { activeVoiceAudio.pause(); activeVoiceAudio.currentTime = 0; } catch (e) {}
+      activeVoiceAudio = null;
+    }
+
+    // 優先播放本機 / GitHub Pages 內建的教育部臺灣台語常用詞辭典真人發音 MP3
+    const localUrl = `audio/${w.aid}.mp3`;
+    const cdnUrl = `${KIPSUTIAN_CDN}/${w.aid}(1).mp3`;
+    const audio = new Audio(localUrl);
+    activeVoiceAudio = audio;
+
+    let triedCdn = false;
+    audio.onerror = () => {
+      if (!triedCdn) {
+        triedCdn = true;
+        audio.src = cdnUrl;
+        audio.play().catch(() => playSynthFallback(w.tl));
+      } else {
+        playSynthFallback(w.tl);
       }
-    } catch (e) {}
+    };
+
+    audio.play().catch(() => {
+      if (!triedCdn) {
+        triedCdn = true;
+        audio.src = cdnUrl;
+        audio.play().catch(() => playSynthFallback(w.tl));
+      }
+    });
   }
 
   /* =========================================================================
@@ -2227,7 +2246,7 @@ html, body {
       ansL = dispKey(w.ans);
       ansR = toPOJ(w.post);
       leftPool = shuffle([ansL, ...pickDistractors(q.pkey, 3).map(dispKey)]);
-      const sampleFinals = ['ue-lîng-ki', 'au-á', 'ê-pue', 'iáu-á', 'i-kue', 'uí', 'ia'].map(toPOJ).filter(x => x !== ansR);
+      const sampleFinals = ['au-á', 'ue-tsiáu', 'ê-pue', 'iáu-á', 'i-kue', 'uí', 'ia'].map(toPOJ).filter(x => x !== ansR);
       rightPool = shuffle([ansR, ...shuffle(sampleFinals).slice(0, 3)]);
     } else {
       ansL = w.pre ? toPOJ(w.pre) : '無子音';
