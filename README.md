@@ -2,9 +2,10 @@
 
 專為兒童設計、100% 全新原創開發的台語羅馬字（子音・母音）互動學習遊戲。
 
-## 遊戲啟動方式
+## 線上直接遊玩 (GitHub Pages)
 
-直接以瀏覽器開啟 [index.html](file:///c:/Users/tu-hs/OneDrive/文件/2022_0308_MASA/2022-0708/Projects_antigravity/TG_GAME_字母音/index.html) 即可遊玩（零外部框架依賴、單一檔案完整運作）。
+- **線上網址**：<https://sinliongtoo.github.io/taigi-phonetics-game/>
+- **本機開啟**：直接以瀏覽器開啟 [index.html](file:///c:/Users/tu-hs/OneDrive/文件/2022_0308_MASA/2022-0708/Projects_antigravity/TG_GAME_字母音/index.html) 即可遊玩（零外部框架依賴、單一檔案完整運作）。
 
 ## 設計特色
 
