@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>台語子母音歡樂派對：打地鼠 ＆ 3D 魔術方塊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #1a1033;
+  --bg-card: #281b4d;
+  --bg-panel: #342463;
+  --accent-gold: #ffca28;
+  --accent-gold-dark: #c79100;
+  --accent-red: #ff5252;
+  --accent-red-dark: #b71c1c;
+  --accent-green: #26c6da;
+  --accent-emerald: #2ecc71;
+  --text-main: #fff8e7;
+  --text-muted: #c5b8e8;
+  --border-glow: #5e439c;
+  --font-main: "Charis SIL", "Calibri", "Segoe UI", "Tahoma", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-roman: "Charis SIL", "Calibri", "Segoe UI", "Tahoma", "Arial", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, #2e1d59 0%, #140b29 100%);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 頂部常駐導覽列：隨時可一鍵回主頁、選關、看圖鑑、切換玩法 */
+.topbar {
+  width: 100%;
+  background: rgba(20, 11, 41, 0.92);
+  border-bottom: 2px solid var(--border-glow);
+  padding: 8px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.brand-icon {
+  font-size: 26px;
+  background: var(--accent-gold);
+  color: #3a1d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  box-shadow: 0 3px 0 var(--accent-gold-dark);
+}
+
+.brand-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--accent-gold);
+  letter-spacing: 0.5px;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.nav-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn {
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 7px 13px;
+  border-radius: 10px;
+  border: 2px solid var(--border-glow);
+  background: var(--bg-card);
+  color: var(--text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.08s, background 0.15s, border-color 0.15s;
+}
+
+.nav-btn:hover {
+  border-color: var(--accent-gold);
+  background: var(--bg-panel);
+}
+
+.nav-btn:active {
+  transform: translateY(2px);
+}
+
+.nav-btn.active {
+  background: var(--accent-gold);
+  color: #321900;
+  border-color: #ffe082;
+  box-shadow: 0 3px 0 var(--accent-gold-dark);
+}
+
+.nav-btn.home-btn {
+  background: #e53935;
+  border-color: #ff8a80;
+  color: #fff;
+  box-shadow: 0 3px 0 #8e0000;
+}
+
+.nav-btn.home-btn:hover {
+  background: #ff5252;
+}
+
+/* 主內容容器 */
+#main-wrap {
+  flex: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+/* 視圖切換 */
+.view-section {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.view-section.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 首頁大廳設計 */
+.hero-banner {
+  background: linear-gradient(135deg, #39236e 0%, #211342 100%);
+  border: 2px solid var(--border-glow);
+  border-radius: 22px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-badge {
+  background: rgba(255, 202, 40, 0.16);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero-title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 900;
+  color: var(--accent-gold);
+  text-shadow: 0 4px 0 #5a2d00;
+}
+
+.hero-desc {
+  max-width: 640px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.mode-card {
+  background: var(--bg-card);
+  border: 3px solid var(--border-glow);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.mode-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-gold);
+}
+
+.mode-card.selected {
+  border-color: var(--accent-gold);
+  background: linear-gradient(180deg, rgba(255,202,40,0.16) 0%, var(--bg-card) 100%);
+  box-shadow: 0 0 0 3px rgba(255,202,40,0.3);
+}
+
+.mode-icon {
+  font-size: 40px;
+}
+
+.mode-card h3 {
+  font-size: 22px;
+  color: var(--accent-gold);
+}
+
+.mode-card .tl-sub {
+  font-family: var(--font-roman);
+  font-size: 14px;
+  color: #80deea;
+  font-weight: 700;
+}
+
+.mode-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.big-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cta-btn {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 900;
+  padding: 13px 28px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.08s;
+}
+
+.cta-btn:active {
+  transform: translateY(3px);
+}
+
+.cta-btn.gold {
+  background: var(--accent-gold);
+  color: #361a00;
+  box-shadow: 0 5px 0 var(--accent-gold-dark);
+}
+
+.cta-btn.secondary {
+  background: var(--bg-panel);
+  color: var(--text-main);
+  border: 2px solid var(--border-glow);
+}
+
+/* 關卡選擇網格 */
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 2px solid var(--border-glow);
+}
+
+.unit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.unit-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-glow);
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.1s, border-color 0.15s;
+}
+
+.unit-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-gold);
+}
+
+.unit-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unit-num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(255,202,40,0.15);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.unit-stars {
+  color: var(--accent-gold);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.unit-card h3 {
+  font-size: 20px;
+  color: var(--text-main);
+}
+
+.unit-card .unit-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.sound-chip {
+  font-family: var(--font-roman);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: rgba(38, 198, 218, 0.16);
+  color: #80deea;
+  border: 1px solid rgba(38, 198, 218, 0.35);
+}
+
+/* 遊戲舞台區 */
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.hud-bar {
+  width: 100%;
+  max-width: 960px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-glow);
+  border-radius: 14px;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hud-stat {
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.question-box {
+  width: 100%;
+  max-width: 960px;
+  background: linear-gradient(180deg, #fff9e6 0%, #ffeec2 100%);
+  color: #2b1700;
+  border: 3px solid var(--accent-gold);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.q-word-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.q-emoji {
+  font-size: 46px;
+  line-height: 1;
+}
+
+.q-hanzi {
+  font-size: 34px;
+  font-weight: 900;
+  color: #2b1700;
+}
+
+.q-roman {
+  font-family: var(--font-roman);
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a237e;
+  background: rgba(255,255,255,0.75);
+  padding: 4px 14px;
+  border-radius: 12px;
+  border: 2px dashed #e53935;
+}
+
+.q-roman .blank {
+  color: #d50000;
+  font-weight: 900;
+  padding: 0 4px;
+  text-decoration: underline;
+}
+
+.q-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.q-prompt-text {
+  font-size: 18px;
+  font-weight: 900;
+  color: #b71c1c;
+}
+
+.q-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.q-btn {
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid #b71c1c;
+  background: #fff;
+  color: #b71c1c;
+  cursor: pointer;
+}
+
+.q-btn:hover {
+  background: #ffebee;
+}
+
+.canvas-holder {
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  background: #140b29;
+  border: 3px solid var(--border-glow);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+}
+
+#stage-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* 圖鑑頁 */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 10px;
+}
+
+.chart-tile {
+  background: var(--bg-card);
+  border: 2px solid var(--border-glow);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.08s, border-color 0.15s;
+}
+
+.chart-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-gold);
+}
+
+.chart-tile.learned {
+  border-color: var(--accent-gold);
+  background: rgba(255, 202, 40, 0.12);
+}
+
+.chart-tile .sym {
+  font-family: var(--font-roman);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.chart-tile .ex {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.chart-tile .kind-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* 彈出教學與結算視窗 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 5, 24, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-card {
+  width: min(680px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 3px solid var(--accent-gold);
+  border-radius: 22px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.phonetic-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--bg-panel);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.phonetic-badge {
+  min-width: 110px;
+  height: 110px;
+  background: var(--accent-gold);
+  color: #361a00;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: inset 0 -5px 0 var(--accent-gold-dark);
+}
+
+.phonetic-badge .big-sym {
+  font-family: var(--font-roman);
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.phonetic-badge .sub-kind {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.example-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.example-item {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.example-item:hover {
+  border-color: var(--accent-gold);
+}
+
+@media (max-width: 680px) {
+  .topbar { padding: 8px 10px; }
+  .brand-sub { display: none; }
+  .q-prompt { align-items: flex-start; width: 100%; }
+  .phonetic-hero { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- 常駐頂部導覽列：任何時候點「回主頁」或「選關卡」都能立刻跳轉 -->
+<header class="topbar">
+  <div class="brand" id="nav-brand" title="點擊回到主頁">
+    <div class="brand-icon">台</div>
+    <div>
+      <div class="brand-title">台語子母音歡樂派對</div>
+      <span class="brand-sub">打地鼠 ・ 3D 魔術方塊 ・ 拼字合體</span>
+    </div>
+  </div>
+
+  <nav class="nav-group" aria-label="主導覽">
+    <button type="button" class="nav-btn home-btn" id="btn-home">🏠 回主頁</button>
+    <button type="button" class="nav-btn" id="btn-levels">🚩 選關卡</button>
+    <button type="button" class="nav-btn" id="btn-chart">📖 子母音圖鑑</button>
+  </nav>
+
+  <div class="nav-group" aria-label="模式與設定">
+    <button type="button" class="nav-btn mode-switch active" data-mode="mole">🔨 打地鼠</button>
+    <button type="button" class="nav-btn mode-switch" data-mode="cube">🧊 魔術方塊</button>
+    <button type="button" class="nav-btn mode-switch" data-mode="spell">🧩 拼字魔方</button>
+    <button type="button" class="nav-btn" id="btn-rom" title="切換台羅 / 白話字">🔤 台羅</button>
+    <button type="button" class="nav-btn" id="btn-mute" title="開關音效">🔊 音效</button>
+  </div>
+</header>
+
+<main id="main-wrap">
+  <!-- 1. 主頁視圖 (Home View) -->
+  <section id="view-home" class="view-section active">
+    <div class="hero-banner">
+      <span class="hero-badge">🌟 專為兒童設計的台語羅馬字（子音 ・ 母音）互動樂園</span>
+      <h1 class="hero-title">台語子母音歡樂派對</h1>
+      <p class="hero-desc">
+        透過「🔨 九宮格打地鼠」、「🧊 3D 旋轉魔術方塊」與「🧩 子母音拼字魔方」三種趣味玩法，
+        帶孩子輕鬆認識 17 個台語子音、16 個基礎與複合母音、鼻化母音及入聲尾音！
+      </p>
+
+      <div class="mode-cards">
+        <div class="mode-card selected" data-pick-mode="mole">
+          <div class="mode-icon">🔨</div>
+          <h3>歡樂打地鼠</h3>
+          <div class="tl-sub">Kòng Tē-tshí (Whack-a-Mole)</div>
+          <p>九宮格草地洞穴！看頂端題目卡缺哪個子音或母音，拿木槌敲擊舉著正確字母木牌的小地鼠（支援滑鼠、觸控與數字鍵 1～9）。</p>
+        </div>
+
+        <div class="mode-card" data-pick-mode="cube">
+          <div class="mode-icon">🧊</div>
+          <h3>3D 魔術方塊</h3>
+          <div class="tl-sub">3D Môo-su̍t Hong-khuài (Magic Cube)</div>
+          <p>立體 3×3×3 魔術方塊！360° 拖曳旋轉六個彩色面，或按「轉層按鈕」轉動魔術方塊行列，找出並點選正確的子母音方塊格！</p>
+        </div>
+
+        <div class="mode-card" data-pick-mode="spell">
+          <div class="mode-icon">🧩</div>
+          <h3>子母音拼字魔方</h3>
+          <div class="tl-sub">Phing-jī Hong-khuài (Syllable Mixer)</div>
+          <p>左邊是「子音 3D 方塊」、右邊是「母音 3D 方塊」！轉動左右兩顆方塊拼出完整台語單字，按下「魔方合體」發射彩虹光芒！</p>
+        </div>
+      </div>
+
+      <div class="big-cta-row">
+        <button type="button" class="cta-btn gold" id="home-start-btn">🚀 立即選關開始玩</button>
+        <button type="button" class="cta-btn secondary" id="home-quick-btn">🔥 直接進入第一關</button>
+        <button type="button" class="cta-btn secondary" id="home-chart-btn">📖 先看子母音發音圖鑑</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 選關卡視圖 (Levels View) -->
+  <section id="view-levels" class="view-section">
+    <div class="section-header">
+      <div>
+        <h2 style="font-size:24px;color:var(--accent-gold)">🚩 選擇學習單元關卡</h2>
+        <p style="font-size:14px;color:var(--text-muted)" id="level-mode-hint">目前玩法：🔨 歡樂打地鼠（點上方按鈕可隨時切換玩法）</p>
+      </div>
+      <div class="nav-group">
+        <span style="font-weight:800;color:var(--accent-gold)" id="total-stars-label">⭐ 累積星星：0</span>
+        <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 返回主頁</button>
+      </div>
+    </div>
+    <div class="unit-grid" id="unit-grid"></div>
+  </section>
+
+  <!-- 3. 遊戲舞台視圖 (Game View) -->
+  <section id="view-game" class="view-section">
+    <div class="game-layout">
+      <div class="hud-bar">
+        <div class="hud-left">
+          <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 主頁</button>
+          <button type="button" class="nav-btn" onclick="switchView('levels')">🚩 換關卡</button>
+          <span class="hud-stat" id="hud-unit-title" style="color:var(--accent-gold)">第 1 關</span>
+        </div>
+        <div class="hud-right">
+          <span class="hud-stat" id="hud-hearts">💖💖💖</span>
+          <span class="hud-stat" style="color:var(--accent-gold)" id="hud-score">⭐ 0 分</span>
+          <span class="hud-stat" style="color:#80deea" id="hud-progress">進度 1 / 6</span>
+          <button type="button" class="nav-btn" id="hud-teach-btn">💡 本關教學卡</button>
+        </div>
+      </div>
+
+      <!-- 題目提示橫幅 -->
+      <div class="question-box" id="question-box">
+        <div class="q-word-group">
+          <span class="q-emoji" id="q-emoji">🚀</span>
+          <div>
+            <div class="q-hanzi" id="q-hanzi">飛凌機</div>
+            <div style="font-size:13px;color:#6d4c41;font-weight:700" id="q-meaning">（飛機）</div>
+          </div>
+          <div class="q-roman" id="q-roman"><span class="blank">[ ? ]</span>ue-lîng-ki</div>
+        </div>
+        <div class="q-prompt">
+          <div class="q-prompt-text" id="q-prompt-text">請找出這個字開頭的「子音」！</div>
+          <div class="q-actions">
+            <button type="button" class="q-btn" id="q-speak-btn">🔊 聽發音 (V)</button>
+            <button type="button" class="q-btn" id="q-hint-btn">💡 發音小秘訣</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 互動畫布舞台 -->
+      <div class="canvas-holder">
+        <canvas id="stage-canvas" width="960" height="540"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 子母音圖鑑視圖 (Phonetics Chart View) -->
+  <section id="view-chart" class="view-section">
+    <div class="section-header">
+      <div>
+        <h2 style="font-size:24px;color:var(--accent-gold)">📖 台語子音 ・ 母音互動發音圖鑑</h2>
+        <p style="font-size:14px;color:var(--text-muted)">點選任一字母卡片，即可聽發音並查看嘴巴發音秘訣與例字！</p>
+      </div>
+      <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 返回主頁</button>
+    </div>
+    <div id="chart-container" style="display:flex;flex-direction:column;gap:18px;"></div>
+  </section>
+</main>
+
+<!-- 教學卡與過關結算彈窗 -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal-card" id="modal-card"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* =========================================================================
+     1. 全新原創台語子母音教材資料庫 (100% NFC 正規化 UTF-8，零亂碼)
+     ========================================================================= */
+  const PHONETICS = {
+    // 雙唇子音
+    p:   { key:'p',   cat:'子音（雙唇音）', tag:'不送氣清音', tip:'雙唇緊閉再輕輕放開，不噴氣（像國語「ㄅ」）。', words:[
+      { h:'飛凌機', tl:'[p]ue-lîng-ki', m:'飛機', e:'🚀', pre:'', ans:'p', post:'ue-lîng-ki' },
+      { h:'包子',   tl:'[p]au-á',       m:'包子', e:'🥟', pre:'', ans:'p', post:'au-á' },
+      { h:'西瓜',   tl:'si-kue ([p]ué)',m:'布袋/尾巴', e:'🎒', pre:'', ans:'p', post:'ué' }
+    ]},
+    ph:  { key:'ph',  cat:'子音（雙唇音）', tag:'送氣清音', tip:'雙唇合起來再用力噴氣出來，手放嘴前會感覺到風（像國語「ㄆ」）。', words:[
+      { h:'氣球',   tl:'[ph]òng-kiû',   m:'氣球', e:'🎈', pre:'', ans:'ph', post:'òng-kiû' },
+      { h:'蘋果',   tl:'[ph]ông-kó',    m:'蘋果', e:'🍎', pre:'', ans:'ph', post:'ông-kó' },
+      { h:'蜜蜂',   tl:'bi̍t-[ph]ang',   m:'蜜蜂', e:'🐝', pre:'bi̍t-', ans:'ph', post:'ang' }
+    ]},
+    b:   { key:'b',   cat:'子音（雙唇音）', tag:'台語特有濁音', tip:'雙唇合起來，喉嚨同時震動發聲（像英語 boy 的 b，國語沒有這個音喔！）。', words:[
+      { h:'白米',   tl:'pe̍h-[b]í',      m:'白米', e:'🍚', pre:'pe̍h-', ans:'b', post:'í' },
+      { h:'帽仔',   tl:'[b]ō-á',        m:'帽子', e:'🧢', pre:'', ans:'b', post:'ō-á' },
+      { h:'馬仔',   tl:'[b]é-á',        m:'小馬', e:'🐴', pre:'', ans:'b', post:'é-á' }
+    ]},
+    m:   { key:'m',   cat:'子音（雙唇音）', tag:'雙唇鼻音', tip:'雙唇閉起來，讓聲音從鼻孔哼出來（像國語「ㄇ」）。', words:[
+      { h:'麵線',   tl:'[m]ī-suànn',    m:'麵線', e:'🍜', pre:'', ans:'m', post:'ī-suànn' },
+      { h:'門扇',   tl:'[m]n̂g-sìnn',    m:'大門', e:'🚪', pre:'', ans:'m', post:'n̂g-sìnn' },
+      { h:'目睭',   tl:'[m]a̍k-tsiu',    m:'眼睛', e:'👀', pre:'', ans:'m', post:'a̍k-tsiu' }
+    ]},
+
+    // 舌尖子音
+    t:   { key:'t',   cat:'子音（舌尖音）', tag:'不送氣清音', tip:'舌尖頂住上牙齒後方再放開，不噴氣（像國語「ㄉ」）。', words:[
+      { h:'茶杯',   tl:'[t]ê-pue',      m:'茶杯', e:'🍵', pre:'', ans:'t', post:'ê-pue' },
+      { h:'小豬',   tl:'sió-[t]i',      m:'小豬', e:'🐷', pre:'sió-', ans:'t', post:'i' },
+      { h:'大象',   tl:'[t]uā-tshiūnn', m:'大象', e:'🐘', pre:'', ans:'t', post:'uā-tshiūnn' }
+    ]},
+    th:  { key:'th',  cat:'子音（舌尖音）', tag:'送氣清音', tip:'舌尖頂住上牙齦再用力噴氣（像國語「ㄊ」）。', words:[
+      { h:'糖仔',   tl:'[th]n̂g-á',      m:'糖果', e:'🍬', pre:'', ans:'th', post:'n̂g-á' },
+      { h:'兔仔',   tl:'[th]òo-á',      m:'兔子', e:'🐰', pre:'', ans:'th', post:'òo-á' },
+      { h:'天頂',   tl:'[th]inn-tíng',  m:'天空', e:'🌈', pre:'', ans:'th', post:'inn-tíng' }
+    ]},
+    n:   { key:'n',   cat:'子音（舌尖音）', tag:'舌尖鼻音', tip:'舌尖頂住上牙齦，聲音從鼻孔出來（像國語「ㄋ」）。', words:[
+      { h:'貓咪',   tl:'[n]iau-mi',     m:'貓咪', e:'🐱', pre:'', ans:'n', post:'iau-mi' },
+      { h:'竹籃',   tl:'tik-[n]â',      m:'籃子', e:'🧺', pre:'tik-', ans:'n', post:'â' },
+      { h:'過年',   tl:'kuè-[n]î',      m:'過年', e:'🧧', pre:'kuè-', ans:'n', post:'î' }
+    ]},
+    l:   { key:'l',   cat:'子音（舌尖音）', tag:'舌尖邊音', tip:'舌尖輕輕彈一下上牙齦（像國語「ㄌ」）。', words:[
+      { h:'露螺',   tl:'[l]ōo-lê',      m:'蝸牛', e:'🐌', pre:'', ans:'l', post:'ōo-lê' },
+      { h:'梅鹿',   tl:'muî-[l]o̍k',     m:'小鹿', e:'🦌', pre:'muî-', ans:'l', post:'o̍k' },
+      { h:'火車路', tl:'hué-tshia-[l]ōo',m:'鐵路', e:'🚂', pre:'hué-tshia-', ans:'l', post:'ōo' }
+    ]},
+
+    // 舌根與喉音
+    k:   { key:'k',   cat:'子音（舌根與喉音）', tag:'不送氣清音', tip:'舌根頂住軟顎再放開，不噴氣（像國語「ㄍ」）。', words:[
+      { h:'小狗',   tl:'sió-[k]áu',     m:'小狗', e:'🐶', pre:'sió-', ans:'k', post:'áu' },
+      { h:'金雞',   tl:'kim-[k]e',      m:'公雞', e:'🐓', pre:'kim-', ans:'k', post:'e' },
+      { h:'烏龜',   tl:'oo-[k]u',       m:'烏龜', e:'🐢', pre:'oo-', ans:'k', post:'u' }
+    ]},
+    kh:  { key:'kh',  cat:'子音（舌根與喉音）', tag:'送氣清音', tip:'舌根頂住軟顎再用力噴氣（像國語「ㄎ」）。', words:[
+      { h:'長褲',   tl:'tn̂g-[kh]òo',    m:'長褲', e:'👖', pre:'tn̂g-', ans:'kh', post:'òo' },
+      { h:'彩虹',   tl:'[kh]īng',       m:'彩虹', e:'🌈', pre:'', ans:'kh', post:'īng' },
+      { h:'開門',   tl:'[kh]ui-mn̂g',    m:'開門', e:'🔓', pre:'', ans:'kh', post:'ui-mn̂g' }
+    ]},
+    g:   { key:'g',   cat:'子音（舌根與喉音）', tag:'台語特有濁音', tip:'舌根頂住上顎，喉嚨震動發出濁音（像英語 go 的 g，國語沒有喔！）。', words:[
+      { h:'水牛',   tl:'tsuí-[g]û',     m:'水牛', e:'🐮', pre:'tsuí-', ans:'g', post:'û' },
+      { h:'白鵝',   tl:'pe̍h-[g]ô',      m:'白鵝', e:'🦢', pre:'pe̍h-', ans:'g', post:'ô' },
+      { h:'月娘',   tl:'[g]ue̍h-niû',    m:'月亮', e:'🌙', pre:'', ans:'g', post:'ue̍h-niû' }
+    ]},
+    ng:  { key:'ng',  cat:'子音（舌根與喉音）', tag:'舌根鼻音', tip:'舌根抵住軟顎，讓聲音從鼻子哼出來。', words:[
+      { h:'黃色',   tl:'[ng]g-sik',     m:'黃色/硬', e:'🪨', pre:'', ans:'ng', post:'ē' },
+      { h:'五彩',   tl:'[ng]óo-tshái',  m:'五彩', e:'🎨', pre:'', ans:'ng', post:'óo-tshái' },
+      { h:'迎鬧熱', tl:'[ng]iâ-lāu-jia̍t',m:'迎神慶典', e:'🎉', pre:'', ans:'ng', post:'iâ' }
+    ]},
+    h:   { key:'h',   cat:'子音（舌根與喉音）', tag:'喉擦音', tip:'從喉嚨輕輕呵氣出來（像國語「ㄏ」）。', words:[
+      { h:'紅花',   tl:'âng-[h]ue',     m:'紅花', e:'🌺', pre:'âng-', ans:'h', post:'ue' },
+      { h:'金魚',   tl:'kim-[h]î',      m:'金魚', e:'🐟', pre:'kim-', ans:'h', post:'î' },
+      { h:'老虎',   tl:'lāu-[h]óo',     m:'老虎', e:'🐯', pre:'lāu-', ans:'h', post:'óo' }
+    ]},
+
+    // 齒音
+    ts:  { key:'ts',  cat:'子音（齒音）', tag:'不送氣塞擦音', tip:'舌尖頂住齒齦再微開，不噴氣（像國語「ㄗ／ㄐ」）。', words:[
+      { h:'鳥仔',   tl:'[ts]iáu-á',     m:'小鳥', e:'🐦', pre:'', ans:'ts', post:'iáu-á' },
+      { h:'甘蔗',   tl:'kam-[ts]ià',    m:'甘蔗', e:'🎋', pre:'kam-', ans:'ts', post:'ià' },
+      { h:'喝水',   tl:'lim-[ts]uí',    m:'喝水', e:'💧', pre:'lim-', ans:'ts', post:'uí' }
+    ]},
+    tsh: { key:'tsh', cat:'子音（齒音）', tag:'送氣塞擦音', tip:'跟 ts 同位置，但要用力噴氣（像國語「ㄘ／ㄑ」）。', words:[
+      { h:'火車',   tl:'hué-[tsh]ia',   m:'火車', e:'🚂', pre:'hué-', ans:'tsh', post:'ia' },
+      { h:'青菜',   tl:'tshenn-[tsh]ài',m:'青菜', e:'🥬', pre:'tshenn-', ans:'tsh', post:'ài' },
+      { h:'大樹',   tl:'tuā-[tsh]iū',   m:'大樹', e:'🌳', pre:'tuā-', ans:'tsh', post:'iū' }
+    ]},
+    s:   { key:'s',   cat:'子音（齒音）', tag:'清擦音', tip:'舌尖靠近齒齦留縫隙摩擦出氣（像國語「ㄙ／ㄒ」）。', words:[
+      { h:'西瓜',   tl:'[s]i-kue',      m:'西瓜', e:'🍉', pre:'', ans:'s', post:'i-kue' },
+      { h:'獅王',   tl:'[s]ai-ông',     m:'獅子', e:'🦁', pre:'', ans:'s', post:'ai-ông' },
+      { h:'高山',   tl:'ko-[s]uann',    m:'高山', e:'🌋', pre:'ko-', ans:'s', post:'uann' }
+    ]},
+    j:   { key:'j',   cat:'子音（齒音）', tag:'台語特有濁音', tip:'舌尖摩擦並讓喉嚨震動（像英語 zoo 的 z）。', words:[
+      { h:'日頭',   tl:'[j]i̍t-thâu',    m:'太陽', e:'🌞', pre:'', ans:'j', post:'i̍t-thâu' },
+      { h:'寫字',   tl:'siá-[j]ī',      m:'寫字', e:'📝', pre:'siá-', ans:'j', post:'ī' },
+      { h:'熱天',   tl:'[j]ua̍h-thinn',  m:'夏天炎熱', e:'🔥', pre:'', ans:'j', post:'ua̍h-thinn' }
+    ]},
+
+    // 六個基礎母音
+    a:   { key:'a',   cat:'基礎母音', tag:'大口元音', tip:'嘴巴自然張大發出「ㄚ」的聲音。', words:[
+      { h:'鴨仔',   tl:'[a]h-á',        m:'小鴨', e:'🦆', pre:'', ans:'a', post:'h-á' },
+      { h:'阿媽',   tl:'a-m[á]',        m:'奶奶', e:'👵', pre:'a-m', ans:'a', post:'' },
+      { h:'腳踏車', tl:'kh[a]-ta̍h-tshia',m:'腳踏車', e:'🚲', pre:'kh', ans:'a', post:'-ta̍h-tshia' }
+    ]},
+    i:   { key:'i',   cat:'基礎母音', tag:'展唇元音', tip:'嘴角往兩側拉開，發出「一」的聲音。', words:[
+      { h:'交椅',   tl:'kau-[í]',       m:'椅子', e:'🪑', pre:'kau-', ans:'i', post:'' },
+      { h:'小豬',   tl:'sió-t[i]',      m:'小豬', e:'🐷', pre:'sió-t', ans:'i', post:'' },
+      { h:'白米',   tl:'pe̍h-b[í]',      m:'白米', e:'🍚', pre:'pe̍h-b', ans:'i', post:'' }
+    ]},
+    u:   { key:'u',   cat:'基礎母音', tag:'圓唇元音', tip:'嘴唇嘟起來圓圓的，發出「ㄨ」的聲音。', words:[
+      { h:'水牛',   tl:'tsuí-g[û]',     m:'水牛', e:'🐮', pre:'tsuí-g', ans:'u', post:'' },
+      { h:'烏龜',   tl:'oo-k[u]',       m:'烏龜', e:'🐢', pre:'oo-k', ans:'u', post:'' },
+      { h:'讀書',   tl:'tha̍k-ts[u]',    m:'讀書', e:'📖', pre:'tha̍k-ts', ans:'u', post:'' }
+    ]},
+    e:   { key:'e',   cat:'基礎母音', tag:'半開前元音', tip:'嘴巴半開、嘴角微拉（像英語 bed 的 e）。', words:[
+      { h:'布鞋',   tl:'pòo-[ê]',       m:'鞋子', e:'👟', pre:'pòo-', ans:'e', post:'' },
+      { h:'茶米',   tl:'t[ê]-bí',       m:'茶葉', e:'🍵', pre:'t', ans:'e', post:'-bí' },
+      { h:'金雞',   tl:'kim-k[e]',      m:'公雞', e:'🐔', pre:'kim-k', ans:'e', post:'' }
+    ]},
+    o:   { key:'o',   cat:'基礎母音', tag:'半閉圓唇音', tip:'嘴唇微圓，舌位較高（像國語「ㄛ」）。注意 o 和 oo 不同喔！', words:[
+      { h:'蚵仔',   tl:'[ô]-á',         m:'牡蠣', e:'🦪', pre:'', ans:'o', post:'-á' },
+      { h:'菜刀',   tl:'tshài-t[o]',    m:'菜刀', e:'🔪', pre:'tshài-t', ans:'o', post:'' },
+      { h:'雞卵糕', tl:'ke-nn̄g-k[o]',   m:'雞蛋糕', e:'🍰', pre:'ke-nn̄g-k', ans:'o', post:'' }
+    ]},
+    oo:  { key:'oo',  cat:'基礎母音', tag:'開口大圓唇音', tip:'嘴巴張得比 o 更大、聲音更低渾（像英語 law 的母音）。', words:[
+      { h:'烏雲',   tl:'[oo]-hûn',      m:'烏雲', e:'🌧', pre:'', ans:'oo', post:'-hûn' },
+      { h:'老虎',   tl:'lāu-h[óo]',     m:'老虎', e:'🐯', pre:'lāu-h', ans:'oo', post:'' },
+      { h:'馬路',   tl:'bé-l[ōo]',      m:'馬路', e:'🚌', pre:'bé-l', ans:'oo', post:'' }
+    ]},
+
+    // 複合母音 (一)
+    ai:  { key:'ai',  cat:'複合母音（一）', tag:'雙母音', tip:'從 a 自然滑動到 i（像國語「ㄞ」）。', words:[
+      { h:'大海',   tl:'tuā-h[ái]',     m:'大海', e:'🌊', pre:'tuā-h', ans:'ai', post:'' },
+      { h:'獅王',   tl:'s[ai]-ông',     m:'獅子', e:'🦁', pre:'s', ans:'ai', post:'-ông' },
+      { h:'鳳梨',   tl:'ông-l[âi]',     m:'鳳梨', e:'🍍', pre:'ông-l', ans:'ai', post:'' }
+    ]},
+    au:  { key:'au',  cat:'複合母音（一）', tag:'雙母音', tip:'從 a 自然滑動到 u（像國語「ㄠ」）。', words:[
+      { h:'小狗',   tl:'sió-k[áu]',     m:'小狗', e:'🐕', pre:'sió-k', ans:'au', post:'' },
+      { h:'包子',   tl:'p[au]-á',       m:'包子', e:'🥟', pre:'p', ans:'au', post:'-á' },
+      { h:'猴山仔', tl:'k[âu]-suann-á', m:'小猴子', e:'🐒', pre:'k', ans:'au', post:'-suann-á' }
+    ]},
+    ia:  { key:'ia',  cat:'複合母音（一）', tag:'雙母音', tip:'從 i 滑到 a（像國語「ㄧㄚ」）。', words:[
+      { h:'火車',   tl:'hué-tsh[ia]',   m:'火車', e:'🚗', pre:'hué-tsh', ans:'ia', post:'' },
+      { h:'寫字',   tl:'s[iá]-jī',      m:'寫字', e:'📝', pre:'s', ans:'ia', post:'-jī' },
+      { h:'狗蟻',   tl:'káu-h[iā]',     m:'螞蟻', e:'🐜', pre:'káu-h', ans:'ia', post:'' }
+    ]},
+    iu:  { key:'iu',  cat:'複合母音（一）', tag:'雙母音', tip:'從 i 滑到圓唇的 u。', words:[
+      { h:'雙手',   tl:'siang-tsh[iú]', m:'雙手', e:'🖐', pre:'siang-tsh', ans:'iu', post:'' },
+      { h:'氣球',   tl:'phòng-k[iû]',   m:'氣球', e:'🎈', pre:'phòng-k', ans:'iu', post:'' },
+      { h:'秋天',   tl:'tsh[iu]-thinn', m:'秋天', e:'🍂', pre:'tsh', ans:'iu', post:'-thinn' }
+    ]},
+    io:  { key:'io',  cat:'複合母音（一）', tag:'台語特色雙母音', tip:'從 i 滑到微圓唇的 o（國語沒有這個音喔！）。', words:[
+      { h:'芎蕉',   tl:'kin-ts[io]',    m:'香蕉', e:'🍌', pre:'kin-ts', ans:'io', post:'' },
+      { h:'微笑',   tl:'bî-tsh[iò]',    m:'微笑', e:'😄', pre:'bî-tsh', ans:'io', post:'' },
+      { h:'大橋',   tl:'tuā-k[iô]',     m:'大橋', e:'🌉', pre:'tuā-k', ans:'io', post:'' }
+    ]},
+
+    // 複合母音 (二)
+    ua:  { key:'ua',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到 a（像國語「ㄨㄚ」）。', words:[
+      { h:'唱歌',   tl:'tshiùnn-k[ua]', m:'唱歌', e:'🎵', pre:'tshiùnn-k', ans:'ua', post:'' },
+      { h:'白紙',   tl:'pe̍h-ts[uá]',    m:'白紙', e:'📄', pre:'pe̍h-ts', ans:'ua', post:'' },
+      { h:'沙埔',   tl:'s[ua]-poo',     m:'沙灘', e:'🌊', pre:'s', ans:'ua', post:'-poo' }
+    ]},
+    ue:  { key:'ue',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到 e。', words:[
+      { h:'紅花',   tl:'âng-h[ue]',     m:'紅花', e:'🌸', pre:'âng-h', ans:'ue', post:'' },
+      { h:'火車',   tl:'h[ué]-tshia',   m:'火車', e:'🔥', pre:'h', ans:'ue', post:'-tshia' },
+      { h:'茶杯',   tl:'tê-p[ue]',      m:'茶杯', e:'🥤', pre:'tê-p', ans:'ue', post:'' }
+    ]},
+    ui:  { key:'ui',  cat:'複合母音（二）', tag:'雙母音', tip:'從 u 滑到清楚的 i。', words:[
+      { h:'喝水',   tl:'lim-ts[uí]',    m:'喝水', e:'💧', pre:'lim-ts', ans:'ui', post:'' },
+      { h:'開門',   tl:'kh[ui]-mn̂g',    m:'開門', e:'🚪', pre:'kh', ans:'ui', post:'-mn̂g' },
+      { h:'花蕊',   tl:'hue-l[uí]',     m:'花朵', e:'🌷', pre:'hue-l', ans:'ui', post:'' }
+    ]},
+    iau: { key:'iau', cat:'複合母音（二）', tag:'三母音', tip:'i + a + u 三個音順暢連在一起（像國語「ㄧㄠ」）。', words:[
+      { h:'貓咪',   tl:'n[iau]-mi',     m:'貓咪', e:'🐈', pre:'n', ans:'iau', post:'-mi' },
+      { h:'鳥仔',   tl:'ts[iáu]-á',     m:'小鳥', e:'🐦', pre:'ts', ans:'iau', post:'-á' },
+      { h:'手錶',   tl:'tshiú-p[iáu]',  m:'手錶', e:'🕰', pre:'tshiú-p', ans:'iau', post:'' }
+    ]},
+    uai: { key:'uai', cat:'複合母音（二）', tag:'三母音', tip:'u + a + i 三個音連在一起（像國語「ㄨㄞ」）。', words:[
+      { h:'乖巧',   tl:'k[uai]-khiáu',  m:'乖巧', e:'😇', pre:'k', ans:'uai', post:'-khiáu' },
+      { h:'真快',   tl:'tsin-kh[uài]',  m:'很快', e:'🔥', pre:'tsin-kh', ans:'uai', post:'' },
+      { h:'歪斜',   tl:'[uai]-tshuah',  m:'歪斜', e:'📐', pre:'', ans:'uai', post:'-tshuah' }
+    ]},
+
+    // 鼻化韻
+    ann:  { key:'ann',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 a 的時候，讓氣流同時從鼻孔出來（nn 代表鼻化記號）。', words:[
+      { h:'新衫',   tl:'sin-s[ann]',    m:'新衣服', e:'👕', pre:'sin-s', ans:'ann', post:'' },
+      { h:'三粒',   tl:'s[ann]-lia̍p',   m:'三顆',   e:'🍡', pre:'s', ans:'ann', post:'-lia̍p' }
+    ]},
+    inn:  { key:'inn',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 i 的時候，讓氣流同時從鼻孔出來。', words:[
+      { h:'甜糖',   tl:'t[inn]-thn̂g',   m:'甜糖果', e:'🍭', pre:'t', ans:'inn', post:'-thn̂g' },
+      { h:'天頂',   tl:'th[inn]-tíng',  m:'天空',   e:'🌈', pre:'th', ans:'inn', post:'-tíng' }
+    ]},
+    enn:  { key:'enn',  cat:'鼻化母音', tag:'鼻化韻', tip:'發 e 的時候，讓氣流同時從鼻孔出來。', words:[
+      { h:'天星',   tl:'thinn-tsh[enn]',m:'星星',   e:'⭐', pre:'thinn-tsh', ans:'enn', post:'' },
+      { h:'紅嬰仔', tl:'âng-[enn]-á',   m:'小嬰兒', e:'👶', pre:'âng-', ans:'enn', post:'-á' }
+    ]},
+    iann: { key:'iann', cat:'鼻化母音', tag:'鼻化韻', tip:'發 ia 的時候，讓氣流同時從鼻孔出來。', words:[
+      { h:'大餅',   tl:'tuā-p[iánn]',   m:'大餅乾', e:'🍪', pre:'tuā-p', ans:'iann', post:'' },
+      { h:'聽歌',   tl:'th[iann]-kua',  m:'聽歌',   e:'🎧', pre:'th', ans:'iann', post:'-kua' }
+    ]},
+    uann: { key:'uann', cat:'鼻化母音', tag:'鼻化韻', tip:'發 ua 的時候，讓氣流同時從鼻孔出來。', words:[
+      { h:'高山',   tl:'ko-s[uann]',    m:'高山',   e:'🌋', pre:'ko-s', ans:'uann', post:'' },
+      { h:'飯碗',   tl:'pn̄g-[uánn]',    m:'飯碗',   e:'🥣', pre:'pn̄g-', ans:'uann', post:'' }
+    ]},
+
+    // 入聲尾音
+    '-p': { key:'-p', cat:'入聲尾音', tag:'雙唇急收音', tip:'發完母音後，雙唇立刻閉起來收音，短促不放開。', words:[
+      { h:'十全',   tl:'tsa̍[p]-tsuân',  m:'數字十', e:'🎯', pre:'tsa̍', ans:'p', post:'-tsuân' },
+      { h:'盒仔',   tl:'a̍[p]-á',        m:'小盒子', e:'📦', pre:'a̍', ans:'p', post:'-á' }
+    ]},
+    '-t': { key:'-t', cat:'入聲尾音', tag:'舌尖急收音', tip:'發完母音後，舌尖立刻頂住上齒齦收住聲音。', words:[
+      { h:'鉛筆',   tl:'iân-pi[t]',     m:'鉛筆',   e:'📏', pre:'iân-pi', ans:'t', post:'' },
+      { h:'日頭',   tl:'ji̍[t]-thâu',    m:'太陽',   e:'🌞', pre:'ji̍', ans:'t', post:'-thâu' }
+    ]},
+    '-k': { key:'-k', cat:'入聲尾音', tag:'舌根急收音', tip:'發完母音後，舌根立刻頂住上顎收住聲音。', words:[
+      { h:'梅鹿',   tl:'muî-lo̍[k]',     m:'小鹿',   e:'🦌', pre:'muî-lo̍', ans:'k', post:'' },
+      { h:'竹仔',   tl:'ti[k]-á',       m:'竹子',   e:'🎋', pre:'ti', ans:'k', post:'-á' }
+    ]},
+    '-h': { key:'-h', cat:'入聲尾音', tag:'喉塞急收音', tip:'喉嚨突然收住氣流，聲音短促停下來。', words:[
+      { h:'鴨仔',   tl:'a[h]-á',        m:'小鴨',   e:'🦆', pre:'a', ans:'h', post:'-á' },
+      { h:'樹葉',   tl:'tshiū-hio̍[h]',  m:'樹葉',   e:'🍃', pre:'tshiū-hio̍', ans:'h', post:'' }
+    ]}
+  };
+
+  // 10 個學習單元關卡
+  const UNITS = [
+    { id: 1, title: '雙唇音小隊', sub: '嘴巴開合的子音 p, ph, b, m', keys: ['p','ph','b','m'], color: '#ff7043' },
+    { id: 2, title: '舌尖音小隊', sub: '舌尖彈跳的子音 t, th, n, l', keys: ['t','th','n','l'], color: '#ffca28' },
+    { id: 3, title: '舌根與喉音', sub: '喉嚨共鳴的子音 k, kh, g, ng, h', keys: ['k','kh','g','ng','h'], color: '#66bb6a' },
+    { id: 4, title: '齒音小隊',   sub: '牙齒摩擦的子音 ts, tsh, s, j', keys: ['ts','tsh','s','j'], color: '#26c6da' },
+    { id: 5, title: '六大基礎母音', sub: '台語最重要的 6 個單母音 a, i, u, e, o, oo', keys: ['a','i','u','e','o','oo'], color: '#42a5f5' },
+    { id: 6, title: '雙母音滑音篇（一）', sub: '動聽滑音 ai, au, ia, iu, io', keys: ['ai','au','ia','iu','io'], color: '#ab47bc' },
+    { id: 7, title: '雙母音與三母音（二）', sub: '圓唇滑音 ua, ue, ui, iau, uai', keys: ['ua','ue','ui','iau','uai'], color: '#ec407a' },
+    { id: 8, title: '鼻化母音篇', sub: '鼻子一起共鳴的 ann, inn, enn, iann, uann', keys: ['ann','inn','enn','iann','uann'], color: '#ffa726' },
+    { id: 9, title: '入聲短促尾音', sub: '短促有力的收尾音 -p, -t, -k, -h', keys: ['-p','-t','-k','-h'], color: '#26a69a' },
+    { id: 10, title: '大魔王總挑戰', sub: '全體子音與母音綜合隨機大考驗！', keys: Object.keys(PHONETICS), color: '#ef5350', boss: true }
+  ];
+
+  /* =========================================================================
+     2. 狀態儲存與台羅 / 白話字轉換
+     ========================================================================= */
+  const STATE = {
+    view: 'home',
+    mode: 'mole',    // 'mole' | 'cube' | 'spell'
+    rom: 'tl',       // 'tl' (台羅) | 'poj' (白話字)
+    muted: false,
+    stars: {},       // key: `${mode}:${unitId}` -> 1..3
+    learned: {},     // key: phoneticKey -> true
+    unitId: 1
+  };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem('taigi-party-save-v1') || '{}');
+    Object.assign(STATE, saved);
+  } catch (e) {}
+
+  function saveProgress() {
+    try {
+      localStorage.setItem('taigi-party-save-v1', JSON.stringify({
+        mode: STATE.mode,
+        rom: STATE.rom,
+        muted: STATE.muted,
+        stars: STATE.stars,
+        learned: STATE.learned
+      }));
+    } catch (e) {}
+  }
+
+  function toPOJ(str) {
+    if (STATE.rom !== 'poj') return str;
+    return String(str)
+      .replace(/tsh/g, 'chh').replace(/Tsh/g, 'Chh')
+      .replace(/ts/g, 'ch').replace(/Ts/g, 'Ch')
+      .replace(/oo/g, 'o͘').replace(/óo/g, 'ó͘').replace(/òo/g, 'ò͘').replace(/ôo/g, 'ô͘').replace(/ōo/g, 'ō͘')
+      .replace(/ua/g, 'oa').replace(/uá/g, 'oá').replace(/uà/g, 'oà').replace(/uâ/g, 'oâ').replace(/uā/g, 'oā')
+      .replace(/ue/g, 'oe').replace(/ué/g, 'oé').replace(/uè/g, 'oè').replace(/uê/g, 'oê').replace(/uē/g, 'oē')
+      .replace(/nn/g, 'ⁿ')
+      .replace(/ing/g, 'eng').replace(/íng/g, 'éng').replace(/ìng/g, 'èng').replace(/îng/g, 'êng').replace(/īng/g, 'ēng')
+      .replace(/ik/g, 'ek');
+  }
+
+  function dispKey(k) {
+    return toPOJ(k);
+  }
+
+  /* =========================================================================
+     3. 音效與台語聲調發音合成器 (Web Audio API)
+     ========================================================================= */
+  let audioCtx = null;
+  function initAudio() {
+    if (!audioCtx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function playTone(freq, dur, { type = 'sine', vol = 0.14, slide = 0, delay = 0 } = {}) {
+    if (STATE.muted) return;
+    initAudio();
+    if (!audioCtx) return;
+    const t0 = audioCtx.currentTime + delay;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    if (slide) osc.frequency.exponentialRampToValueAtTime(slide, t0 + dur);
+    gain.gain.setValueAtTime(vol, t0);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(t0);
+    osc.stop(t0 + dur + 0.02);
+  }
+
+  const SFX = {
+    whack: () => { playTone(210, 0.09, { type: 'triangle', slide: 75, vol: 0.25 }); playTone(520, 0.07, { type: 'sine', slide: 280, vol: 0.12, delay: 0.02 }); },
+    pop:   () => playTone(360, 0.08, { type: 'sine', slide: 590, vol: 0.09 }),
+    twist: () => { playTone(440, 0.05, { type: 'triangle', slide: 680, vol: 0.12 }); playTone(700, 0.04, { type: 'sine', slide: 900, vol: 0.08, delay: 0.03 }); },
+    fuse:  () => [440, 554, 659, 880, 1108].forEach((f, i) => playTone(f, 0.15, { type: 'triangle', vol: 0.12, delay: i * 0.055 })),
+    right: () => [523, 659, 784, 1046].forEach((f, i) => playTone(f, 0.15, { type: 'triangle', vol: 0.14, delay: i * 0.07 })),
+    wrong: () => { playTone(190, 0.18, { type: 'sawtooth', vol: 0.1 }); playTone(145, 0.26, { type: 'sawtooth', vol: 0.1, delay: 0.15 }); },
+    win:   () => [523, 659, 784, 659, 784, 1046].forEach((f, i) => playTone(f, 0.18, { type: 'triangle', vol: 0.14, delay: i * 0.11 }))
+  };
+
+  function speakPhonetic(key, wordObj) {
+    initAudio();
+    const p = PHONETICS[key];
+    const w = wordObj || (p && p.words[0]);
+    // 合成清脆的台語聲調示範音 + 瀏覽器語音輔助
+    if (!STATE.muted && audioCtx) {
+      let fStart = 290, fEnd = 290, dur = 0.34;
+      const tlStr = w ? w.tl : key;
+      if (/[áéíóú]/.test(tlStr)) { fStart = 350; fEnd = 185; }
+      else if (/[àèìòù]/.test(tlStr)) { fStart = 215; fEnd = 140; }
+      else if (/[âêîôû]/.test(tlStr)) { fStart = 180; fEnd = 320; dur = 0.38; }
+      else if (/[āēīōū]/.test(tlStr)) { fStart = 240; fEnd = 240; }
+      else if (/[ptkh]\]?$/i.test(tlStr)) { fStart = 260; fEnd = 240; dur = 0.16; }
+
+      playTone(fStart, dur, { type: 'triangle', slide: fEnd, vol: 0.18 });
+      playTone(fStart * 2, dur * 0.9, { type: 'sine', slide: fEnd * 2, vol: 0.07 });
+    }
+    try {
+      if (window.speechSynthesis && w && w.h && !STATE.muted) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(w.h);
+        u.lang = 'zh-TW';
+        u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+      }
+    } catch (e) {}
+  }
+
+  /* =========================================================================
+     4. 視圖與導覽控制 (確保隨時一鍵回到主頁 / 選關 / 圖鑑)
+     ========================================================================= */
+  window.switchView = function(targetView) {
+    closeModal();
+    STATE.view = targetView;
+    document.querySelectorAll('.view-section').forEach(sec => {
+      sec.classList.toggle('active', sec.id === 'view-' + targetView);
+    });
+    if (targetView === 'levels') renderLevelsGrid();
+    if (targetView === 'chart') renderPhoneticsChart();
+    if (targetView === 'home') syncModeUI();
+  };
+
+  function syncModeUI() {
+    document.querySelectorAll('.mode-switch').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === STATE.mode);
+    });
+    document.querySelectorAll('.mode-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.pickMode === STATE.mode);
+    });
+    const modeNames = {
+      mole: '🔨 歡樂打地鼠（Kòng Tē-tshí）',
+      cube: '🧊 3D 魔術方塊（Môo-su̍t Hong-khuài）',
+      spell: '🧩 子母音拼字魔方（Phing-jī Hong-khuài）'
+    };
+    const hintEl = document.getElementById('level-mode-hint');
+    if (hintEl) hintEl.textContent = '目前玩法：' + modeNames[STATE.mode] + '（點頂部按鈕可隨時切換）';
+    document.getElementById('btn-rom').textContent = STATE.rom === 'tl' ? '🔤 台羅' : '🔤 白話字';
+    document.getElementById('btn-mute').textContent = STATE.muted ? '🔇 靜音' : '🔊 音效';
+  }
+
+  // 頂部導覽按鈕綁定
+  document.getElementById('nav-brand').onclick = () => window.switchView('home');
+  document.getElementById('btn-home').onclick = () => window.switchView('home');
+  document.getElementById('btn-levels').onclick = () => window.switchView('levels');
+  document.getElementById('btn-chart').onclick = () => window.switchView('chart');
+
+  document.querySelectorAll('.mode-switch').forEach(btn => {
+    btn.onclick = () => {
+      STATE.mode = btn.dataset.mode;
+      saveProgress();
+      syncModeUI();
+      if (STATE.view === 'levels') renderLevelsGrid();
+      if (STATE.view === 'game') startUnitGame(STATE.unitId);
+    };
+  });
+
+  document.querySelectorAll('.mode-card').forEach(card => {
+    card.onclick = () => {
+      STATE.mode = card.dataset.pickMode;
+      saveProgress();
+      syncModeUI();
+    };
+    card.ondblclick = () => {
+      STATE.mode = card.dataset.pickMode;
+      saveProgress();
+      syncModeUI();
+      window.switchView('levels');
+    };
+  });
+
+  document.getElementById('btn-rom').onclick = () => {
+    STATE.rom = STATE.rom === 'tl' ? 'poj' : 'tl';
+    saveProgress();
+    syncModeUI();
+    if (STATE.view === 'levels') renderLevelsGrid();
+    if (STATE.view === 'chart') renderPhoneticsChart();
+    if (STATE.view === 'game') updateQuestionBanner();
+  };
+
+  document.getElementById('btn-mute').onclick = () => {
+    STATE.muted = !STATE.muted;
+    saveProgress();
+    syncModeUI();
+  };
+
+  document.getElementById('home-start-btn').onclick = () => window.switchView('levels');
+  document.getElementById('home-quick-btn').onclick = () => startUnitGame(1);
+  document.getElementById('home-chart-btn').onclick = () => window.switchView('chart');
+
+  /* =========================================================================
+     5. 關卡列表與子母音圖鑑渲染
+     ========================================================================= */
+  function renderLevelsGrid() {
+    const grid = document.getElementById('unit-grid');
+    let totalStars = 0;
+    Object.values(STATE.stars).forEach(s => { totalStars += s; });
+    document.getElementById('total-stars-label').textContent = `⭐ 累積星星：${totalStars}`;
+
+    grid.innerHTML = UNITS.map(u => {
+      const sKey = `${STATE.mode}:${u.id}`;
+      const st = STATE.stars[sKey] || 0;
+      const starsStr = [1, 2, 3].map(i => i <= st ? '⭐' : '⚪').join('');
+      const chips = (u.boss ? ['p','t','k','ts','a','oo','ai','ann','-p'] : u.keys)
+        .map(k => `<span class="sound-chip">${dispKey(k)}</span>`).join('');
+      return `
+        <div class="unit-card" data-uid="${u.id}" style="border-top: 5px solid ${u.color}">
+          <div class="unit-top">
+            <span class="unit-num">UNIT ${u.id}</span>
+            <span class="unit-stars">${starsStr}</span>
+          </div>
+          <h3>${u.title}</h3>
+          <div class="unit-sub">${u.sub}</div>
+          <div class="chip-list">${chips}</div>
+        </div>
+      `;
+    }).join('');
+
+    grid.querySelectorAll('.unit-card').forEach(card => {
+      card.onclick = () => startUnitGame(Number(card.dataset.uid));
+    });
+  }
+
+  function renderPhoneticsChart() {
+    const container = document.getElementById('chart-container');
+    const categories = [
+      '子音（雙唇音）', '子音（舌尖音）', '子音（舌根與喉音）', '子音（齒音）',
+      '基礎母音', '複合母音（一）', '複合母音（二）', '鼻化母音', '入聲尾音'
+    ];
+    container.innerHTML = categories.map(cat => {
+      const items = Object.values(PHONETICS).filter(p => p.cat === cat);
+      const tiles = items.map(p => {
+        const w0 = p.words[0];
+        const learnedCls = STATE.learned[p.key] ? 'learned' : '';
+        return `
+          <div class="chart-tile ${learnedCls}" data-pkey="${p.key}">
+            <span class="sym">${dispKey(p.key)}</span>
+            <span class="ex">${w0.e} ${w0.h}</span>
+            <span class="kind-tag">${toPOJ(w0.tl.replace(/[\[\]]/g, ''))}</span>
+          </div>
+        `;
+      }).join('');
+      return `
+        <div style="background:var(--bg-card);padding:16px;border-radius:16px;border:1px solid var(--border-glow)">
+          <h3 style="color:var(--accent-gold);margin-bottom:10px;font-size:18px">${cat}</h3>
+          <div class="chart-grid">${tiles}</div>
+        </div>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.chart-tile').forEach(tile => {
+      tile.onclick = () => openPhoneticModal(tile.dataset.pkey);
+    });
+  }
+
+  /* =========================================================================
+     6. 彈窗系統 (發音教學卡 & 過關結算)
+     ========================================================================= */
+  const backdrop = document.getElementById('modal-backdrop');
+  const modalCard = document.getElementById('modal-card');
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+  }
+  backdrop.onclick = (e) => { if (e.target === backdrop) closeModal(); };
+
+  function openPhoneticModal(pkey, onContinue = null) {
+    const p = PHONETICS[pkey];
+    if (!p) return;
+    STATE.learned[pkey] = true;
+    saveProgress();
+    speakPhonetic(pkey, p.words[0]);
+
+    const exHtml = p.words.map((w, idx) => {
+      const cleanTl = toPOJ(w.tl).replace('[', '<b style="color:#ffca28;text-decoration:underline">').replace(']', '</b>');
+      return `
+        <div class="example-item" data-ex-idx="${idx}">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:32px">${w.e}</span>
+            <div>
+              <div style="font-size:20px;font-weight:900">${w.h} <small style="color:var(--text-muted);font-size:13px">(${w.m})</small></div>
+              <div style="font-family:var(--font-roman);font-size:18px;color:#80deea">${cleanTl}</div>
+            </div>
+          </div>
+          <span style="font-size:20px">🔊</span>
+        </div>
+      `;
+    }).join('');
+
+    modalCard.innerHTML = `
+      <div class="modal-header">
+        <span class="hero-badge">${p.cat} ・ ${p.tag}</span>
+        <button type="button" class="nav-btn" id="modal-close-x">✖ 關閉</button>
+      </div>
+      <div class="phonetic-hero">
+        <div class="phonetic-badge">
+          <span class="big-sym">${dispKey(p.key)}</span>
+          <span class="sub-kind">點下方例字聽發音</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <h3 style="font-size:22px;color:var(--accent-gold)">發音小秘訣</h3>
+          <p style="font-size:16px;line-height:1.6">${p.tip}</p>
+          <div>
+            <button type="button" class="nav-btn active" id="modal-spk-main">🔊 聽「${dispKey(p.key)}」示範發音</button>
+          </div>
+        </div>
+      </div>
+      <h4 style="color:var(--text-muted);font-size:14px">點擊例字卡片聽發音：</h4>
+      <div class="example-list">${exHtml}</div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:6px">
+        <button type="button" class="cta-btn gold" id="modal-ok-btn">${onContinue ? '記住了，開始挑戰' : '知道了'}</button>
+      </div>
+    `;
+
+    backdrop.classList.add('open');
+    document.getElementById('modal-close-x').onclick = () => { closeModal(); if (onContinue) onContinue(); };
+    document.getElementById('modal-ok-btn').onclick = () => { closeModal(); if (onContinue) onContinue(); };
+    document.getElementById('modal-spk-main').onclick = () => speakPhonetic(pkey, p.words[0]);
+    modalCard.querySelectorAll('.example-item').forEach(el => {
+      el.onclick = () => speakPhonetic(pkey, p.words[Number(el.dataset.exIdx)]);
+    });
+  }
+
+  function openUnitIntroModal(unit) {
+    const keysHtml = unit.keys.slice(0, 8).map(k => {
+      const p = PHONETICS[k];
+      const w = p.words[0];
+      return `
+        <div class="example-item" data-intro-key="${k}">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-roman);font-size:28px;font-weight:900;color:var(--accent-gold);min-width:48px">${dispKey(k)}</span>
+            <div>
+              <div style="font-size:16px;font-weight:800">${w.e} ${w.h} (${toPOJ(w.tl.replace(/[\[\]]/g,''))})</div>
+              <div style="font-size:12px;color:var(--text-muted)">${p.tip}</div>
+            </div>
+          </div>
+          <span>🔊</span>
+        </div>
+      `;
+    }).join('');
+
+    modalCard.innerHTML = `
+      <div class="modal-header">
+        <span class="hero-badge">UNIT ${unit.id} 課前小看板</span>
+        <button type="button" class="nav-btn" id="intro-skip">直接開始</button>
+      </div>
+      <h2 style="font-size:26px;color:var(--accent-gold)">${unit.title}：${unit.sub}</h2>
+      <p style="font-size:14px;color:var(--text-muted)">點選下方卡片可以先聽發音，準備好就按「開始遊戲」！</p>
+      <div class="example-list" style="grid-template-columns:1fr">${keysHtml}</div>
+      <div style="display:flex;justify-content:space-between;gap:10px;margin-top:8px">
+        <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 回主頁</button>
+        <button type="button" class="cta-btn gold" id="intro-go">🔨 準備好了，開始遊戲！</button>
+      </div>
+    `;
+    backdrop.classList.add('open');
+    document.getElementById('intro-skip').onclick = closeModal;
+    document.getElementById('intro-go').onclick = closeModal;
+    modalCard.querySelectorAll('[data-intro-key]').forEach(el => {
+      el.onclick = () => speakPhonetic(el.dataset.introKey);
+    });
+  }
+
+  function openResultModal() {
+    SFX.win();
+    const stars = GAME.wrong === 0 ? 3 : GAME.wrong <= 2 ? 2 : 1;
+    const sKey = `${STATE.mode}:${GAME.unit.id}`;
+    STATE.stars[sKey] = Math.max(STATE.stars[sKey] || 0, stars);
+    GAME.unit.keys.forEach(k => { STATE.learned[k] = true; });
+    saveProgress();
+
+    const starsStr = [1, 2, 3].map(i => i <= stars ? '⭐' : '⚪').join(' ');
+    const nextUnit = UNITS.find(u => u.id === GAME.unit.id + 1);
+
+    modalCard.innerHTML = `
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+        <span class="hero-badge">UNIT ${GAME.unit.id} 挑戰完成！</span>
+        <h2 style="font-size:36px;color:var(--accent-gold)">🎉 恭喜過關！ Kuè-kuan!</h2>
+        <div style="font-size:44px;letter-spacing:6px">${starsStr}</div>
+        <div style="display:flex;gap:20px;background:var(--bg-panel);padding:14px 28px;border-radius:16px">
+          <div><div style="font-size:26px;font-weight:900;color:var(--accent-gold)">${GAME.score}</div><div style="font-size:13px;color:var(--text-muted)">總得分</div></div>
+          <div><div style="font-size:26px;font-weight:900;color:#80deea">${GAME.maxCombo}</div><div style="font-size:13px;color:var(--text-muted)">最高連擊</div></div>
+          <div><div style="font-size:26px;font-weight:900;color:#ff8a80">${GAME.wrong}</div><div style="font-size:13px;color:var(--text-muted)">失誤次數</div></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px">
+          <button type="button" class="nav-btn home-btn" onclick="switchView('home')">🏠 回主頁</button>
+          <button type="button" class="nav-btn" onclick="switchView('levels')">🚩 選關卡</button>
+          <button type="button" class="cta-btn secondary" id="res-retry">🔄 再玩一次</button>
+          ${nextUnit ? `<button type="button" class="cta-btn gold" id="res-next">下一關：${nextUnit.title}</button>` : ''}
+        </div>
+      </div>
+    `;
+    backdrop.classList.add('open');
+    document.getElementById('res-retry').onclick = () => { closeModal(); startUnitGame(GAME.unit.id); };
+    if (nextUnit) {
+      document.getElementById('res-next').onclick = () => { closeModal(); startUnitGame(nextUnit.id); };
+    }
+  }
+
+  /* =========================================================================
+     7. 遊戲核心引擎 (打地鼠 Mole / 3D 魔術方塊 Cube / 拼字魔方 Spell)
+     ========================================================================= */
+  const canvas = document.getElementById('stage-canvas');
+  const ctx = canvas.getContext('2d');
+  const CW = 960, CH = 540;
+
+  const GAME = {
+    active: false,
+    unit: UNITS[0],
+    questions: [],
+    qIndex: 0,
+    score: 0,
+    hearts: 3,
+    combo: 0,
+    maxCombo: 0,
+    wrong: 0,
+    t: 0,
+    shake: 0,
+    toast: null,
+    particles: [],
+    // 打地鼠狀態
+    holes: [],
+    mallet: { x: 480, y: 300, hit: 0, sel: 4 },
+    // 3D 魔術方塊狀態
+    cube: {
+      rotX: -0.35, rotY: 0.45, targetRotX: -0.35, targetRotY: 0.45,
+      cells: [], twist: null, quads: []
+    },
+    // 拼字魔方狀態
+    spell: {
+      leftOpts: [], rightOpts: [], curL: 0, curR: 0,
+      ansL: '', ansR: '', rotL: 0, rotR: 0, fuseAnim: 0
+    }
+  };
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function showToast(msg, dur = 2.6) {
+    GAME.toast = { text: msg, t: dur };
+  }
+
+  function addBurst(x, y, color = '#ffca28', count = 18) {
+    for (let i = 0; i < count; i++) {
+      const ang = Math.random() * Math.PI * 2;
+      const spd = 90 + Math.random() * 210;
+      GAME.particles.push({
+        kind: 'dot', x, y,
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd - 80,
+        color, r: 3 + Math.random() * 4, life: 0.65, max: 0.65
+      });
+    }
+  }
+
+  function addFloatText(x, y, text, color = '#ffca28') {
+    GAME.particles.push({
+      kind: 'text', x, y, vy: -55, text, color, life: 1.1, max: 1.1
+    });
+  }
+
+  function buildQuestionsForUnit(unit) {
+    const poolKeys = unit.boss ? shuffle(unit.keys).slice(0, 8) : unit.keys;
+    const list = [];
+    // 每個字母挑 2 個例字題目（總共 6～8 題）
+    poolKeys.forEach(k => {
+      const p = PHONETICS[k];
+      const words = shuffle(p.words);
+      list.push({ pkey: k, word: words[0], p });
+      if (!unit.boss && words[1]) list.push({ pkey: k, word: words[1], p });
+    });
+    return shuffle(list).slice(0, unit.boss ? 8 : 6);
+  }
+
+  function pickDistractors(pkey, count = 3) {
+    const unitPool = GAME.unit.keys.filter(k => k !== pkey);
+    const allPool = Object.keys(PHONETICS).filter(k => k !== pkey);
+    const src = unitPool.length >= count ? unitPool : allPool;
+    return shuffle(src).slice(0, count);
+  }
+
+  function startUnitGame(unitId) {
+    const unit = UNITS.find(u => u.id === unitId) || UNITS[0];
+    STATE.unitId = unit.id;
+    window.switchView('game');
+    syncModeUI();
+
+    GAME.unit = unit;
+    GAME.questions = buildQuestionsForUnit(unit);
+    GAME.qIndex = 0;
+    GAME.score = 0;
+    GAME.hearts = 3;
+    GAME.combo = 0;
+    GAME.maxCombo = 0;
+    GAME.wrong = 0;
+    GAME.particles = [];
+    GAME.active = true;
+
+    initMoleHoles();
+    setupCurrentQuestion();
+
+    if (!unit.boss) {
+      openUnitIntroModal(unit);
+    } else {
+      showToast('👑 大魔王總挑戰開始！看準題目快手出擊！', 3.2);
+    }
+  }
+
+  function currentQ() {
+    return GAME.questions[GAME.qIndex];
+  }
+
+  function updateHUD() {
+    document.getElementById('hud-unit-title').textContent = `UNIT ${GAME.unit.id}：${GAME.unit.title}`;
+    document.getElementById('hud-hearts').textContent = '💖'.repeat(Math.max(0, GAME.hearts)) + '🖤'.repeat(Math.max(0, 3 - GAME.hearts));
+    document.getElementById('hud-score').textContent = `⭐ ${GAME.score} 分`;
+    document.getElementById('hud-progress').textContent = `題目 ${GAME.qIndex + 1} / ${GAME.questions.length}`;
+  }
+
+  function updateQuestionBanner() {
+    const q = currentQ();
+    if (!q) return;
+    document.getElementById('q-emoji').textContent = q.word.e;
+    document.getElementById('q-hanzi').textContent = q.word.h;
+    document.getElementById('q-meaning').textContent = `（${q.word.m}）`;
+
+    const romParts = toPOJ(q.word.tl).split(/\[.*?\]/);
+    document.getElementById('q-roman').innerHTML = `${romParts[0] || ''}<span class="blank">[ ? ]</span>${romParts[1] || ''}`;
+
+    const modeAction = STATE.mode === 'mole' ? '敲擊正確的地鼠' : STATE.mode === 'cube' ? '點選魔術方塊上的正確字母' : '轉動左右魔方合體';
+    document.getElementById('q-prompt-text').textContent = `請${modeAction}（${q.p.cat}）`;
+    updateHUD();
+  }
+
+  document.getElementById('q-speak-btn').onclick = () => {
+    const q = currentQ();
+    if (q) speakPhonetic(q.pkey, q.word);
+  };
+  document.getElementById('q-hint-btn').onclick = () => {
+    const q = currentQ();
+    if (q) showToast(`💡 發音提示：${q.p.tip}`, 4.0);
+  };
+  document.getElementById('hud-teach-btn').onclick = () => {
+    const q = currentQ();
+    if (q) openPhoneticModal(q.pkey);
+  };
+
+  function setupCurrentQuestion() {
+    const q = currentQ();
+    if (!q) {
+      openResultModal();
+      return;
+    }
+    updateQuestionBanner();
+    speakPhonetic(q.pkey, q.word);
+
+    if (STATE.mode === 'mole') {
+      spawnMoleWaveForQ(q);
+    } else if (STATE.mode === 'cube') {
+      populateCubeForQ(q);
+    } else if (STATE.mode === 'spell') {
+      setupSpellForQ(q);
+    }
+  }
+
+  function onCorrectAnswer(x, y, bonus = 0) {
+    const q = currentQ();
+    SFX.right();
+    GAME.combo++;
+    GAME.maxCombo = Math.max(GAME.maxCombo, GAME.combo);
+    const pts = 100 + (GAME.combo - 1) * 25 + bonus;
+    GAME.score += pts;
+    STATE.learned[q.pkey] = true;
+    saveProgress();
+
+    addBurst(x, y, '#ffca28', 26);
+    addFloatText(x, y - 30, `答對了！ +${pts}${GAME.combo >= 2 ? ' (連擊×' + GAME.combo + ')' : ''}`, '#ffca28');
+    showToast(`🎉 答對了！「${q.word.h}」的拼音是 ${toPOJ(q.word.tl.replace(/[\[\]]/g, ''))}`, 2.2);
+
+    updateHUD();
+    setTimeout(() => {
+      GAME.qIndex++;
+      if (GAME.qIndex >= GAME.questions.length) {
+        openResultModal();
+      } else {
+        setupCurrentQuestion();
+      }
+    }, 650);
+  }
+
+  function onWrongAnswer(x, y, customMsg = null) {
+    const q = currentQ();
+    SFX.wrong();
+    GAME.combo = 0;
+    GAME.wrong++;
+    GAME.shake = 0.35;
+    addBurst(x, y, '#ff5252', 14);
+    addFloatText(x, y - 25, '毋著喔！再試一下', '#ff8a80');
+    showToast(customMsg || `💡 提示：${q.p.tip}`, 3.5);
+    updateHUD();
+  }
+
+  /* =========================================================================
+     7A. 模式一：🔨 歡樂打地鼠 (Whack-a-Mole)
+     ========================================================================= */
+  const HOLE_COORDS = [
+    { x: 260, y: 195, s: 0.86, num: 1 }, { x: 480, y: 195, s: 0.86, num: 2 }, { x: 700, y: 195, s: 0.86, num: 3 },
+    { x: 235, y: 325, s: 0.95, num: 4 }, { x: 480, y: 325, s: 0.95, num: 5 }, { x: 725, y: 325, s: 0.95, num: 6 },
+    { x: 210, y: 465, s: 1.05, num: 7 }, { x: 480, y: 465, s: 1.05, num: 8 }, { x: 750, y: 465, s: 1.05, num: 9 }
+  ];
+
+  function initMoleHoles() {
+    GAME.holes = HOLE_COORDS.map((h, idx) => ({
+      ...h, idx, mole: null, cool: 0.1 * idx
+    }));
+  }
+
+  function spawnMoleWaveForQ(q) {
+    GAME.holes.forEach(h => { h.mole = null; h.cool = 0.15; });
+    const opts = shuffle([q.pkey, ...pickDistractors(q.pkey, 3)]);
+    const holeIndices = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+
+    opts.forEach((k, i) => {
+      const h = GAME.holes[holeIndices[i]];
+      h.mole = {
+        kind: 'letter',
+        pkey: k,
+        critter: ['rat', 'frog', 'bear', 'shiba'][i % 4],
+        up: 0,
+        state: 'rise',
+        stay: 2.8 + Math.random() * 0.8
+      };
+    });
+
+    // 額外隨機冒出一隻加分星星鼠或調皮炸彈鼠
+    const extraHole = GAME.holes[holeIndices[4]];
+    if (extraHole) {
+      const isStar = Math.random() < 0.6;
+      extraHole.mole = {
+        kind: isStar ? 'star' : 'bomb',
+        pkey: isStar ? '⭐+50' : '💣勿敲',
+        critter: isStar ? 'shiba' : 'bomb',
+        up: 0,
+        state: 'rise',
+        stay: 2.3
+      };
+    }
+    SFX.pop();
+  }
+
+  function whackMoleAt(idx) {
+    if (STATE.view !== 'game' || STATE.mode !== 'mole' || idx < 0 || idx >= 9) return;
+    const h = GAME.holes[idx];
+    GAME.mallet.sel = idx;
+    GAME.mallet.x = h.x;
+    GAME.mallet.y = h.y - 45 * h.s;
+    GAME.mallet.hit = 1.0;
+    SFX.whack();
+
+    const m = h.mole;
+    if (!m || m.state === 'hit') return;
+    const q = currentQ();
+    if (!q) return;
+
+    if (m.kind === 'star') {
+      m.state = 'hit'; m.hitT = 0.35;
+      GAME.score += 50;
+      SFX.right();
+      addBurst(h.x, h.y - 50, '#ffca28', 16);
+      addFloatText(h.x, h.y - 75, '⭐ 幸運金星 +50！', '#ffca28');
+      updateHUD();
+    } else if (m.kind === 'bomb') {
+      m.state = 'hit'; m.hitT = 0.4;
+      onWrongAnswer(h.x, h.y - 50, '💥 哎呀！敲到調皮炸彈了，看準字母牌再敲喔！');
+    } else if (m.kind === 'letter') {
+      if (m.pkey === q.pkey) {
+        m.state = 'hit'; m.hitT = 0.45; m.right = true;
+        onCorrectAnswer(h.x, h.y - 60);
+      } else {
+        m.state = 'hit'; m.hitT = 0.45; m.wrong = true;
+        onWrongAnswer(h.x, h.y - 60);
+      }
+    }
+  }
+
+  function updateMoleMode(dt) {
+    const q = currentQ();
+    if (!q) return;
+    if (GAME.mallet.hit > 0) GAME.mallet.hit = Math.max(0, GAME.mallet.hit - dt * 5.2);
+
+    let activeLetters = 0;
+    GAME.holes.forEach(h => {
+      if (h.cool > 0) h.cool -= dt;
+      const m = h.mole;
+      if (!m) return;
+      if (m.kind === 'letter') activeLetters++;
+
+      if (m.state === 'rise') {
+        m.up = Math.min(1, m.up + dt * 4.5);
+        if (m.up >= 1) m.state = 'stay';
+      } else if (m.state === 'stay') {
+        m.stay -= dt;
+        if (m.stay <= 0) m.state = 'sink';
+      } else if (m.state === 'sink') {
+        m.up = Math.max(0, m.up - dt * 4.0);
+        if (m.up <= 0) { h.mole = null; h.cool = 0.3; }
+      } else if (m.state === 'hit') {
+        m.hitT -= dt;
+        m.up = Math.max(0, m.up - dt * 2.8);
+        if (m.hitT <= 0) { h.mole = null; h.cool = 0.25; }
+      }
+    });
+
+    // 若場上地鼠都縮回去了且還沒答出，自動冒出新一波
+    if (activeLetters === 0) {
+      spawnMoleWaveForQ(q);
+    }
+  }
+
+  function drawCuteCritter(x, y, s, type, hit) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(s, s);
+    if (type === 'frog') {
+      ctx.fillStyle = '#4caf50';
+      ctx.beginPath(); ctx.ellipse(0, -18, 28, 24, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#c8e6c9';
+      ctx.beginPath(); ctx.ellipse(0, -12, 18, 14, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#4caf50';
+      ctx.beginPath(); ctx.arc(-15, -38, 9, 0, Math.PI * 2); ctx.arc(15, -38, 9, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(-15, -38, 5, 0, Math.PI * 2); ctx.arc(15, -38, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#111';
+      ctx.beginPath(); ctx.arc(-15, -38, 2.5, 0, Math.PI * 2); ctx.arc(15, -38, 2.5, 0, Math.PI * 2); ctx.fill();
+    } else if (type === 'bear') {
+      ctx.fillStyle = '#37474f';
+      ctx.beginPath(); ctx.arc(-18, -38, 9, 0, Math.PI * 2); ctx.arc(18, -38, 9, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(0, -18, 29, 25, 0, 0, Math.PI * 2); ctx.fill();
+      // 台灣黑熊白色 V 字領
+      ctx.strokeStyle = '#fff8e1'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(-10, -8); ctx.lineTo(0, 0); ctx.lineTo(10, -8); ctx.stroke();
+      ctx.fillStyle = '#ffe0b2';
+      ctx.beginPath(); ctx.ellipse(0, -16, 10, 8, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(-10, -25, 4, 0, Math.PI * 2); ctx.arc(10, -25, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#111';
+      ctx.beginPath(); ctx.arc(-10, -25, 2, 0, Math.PI * 2); ctx.arc(10, -25, 2, 0, Math.PI * 2); ctx.fill();
+    } else if (type === 'bomb') {
+      ctx.fillStyle = '#263238';
+      ctx.beginPath(); ctx.arc(0, -20, 24, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(0, -44); ctx.quadraticCurveTo(10, -56, 18, -50); ctx.stroke();
+      ctx.fillStyle = '#ff5252';
+      ctx.beginPath(); ctx.arc(18, -50, 5 + Math.sin(GAME.t * 20) * 2, 0, Math.PI * 2); ctx.fill();
+    } else {
+      // 可愛黃金地鼠
+      ctx.fillStyle = '#d88c46';
+      ctx.beginPath(); ctx.arc(-18, -36, 8, 0, Math.PI * 2); ctx.arc(18, -36, 8, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(0, -18, 28, 25, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#ffe0b2';
+      ctx.beginPath(); ctx.ellipse(0, -13, 16, 13, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#e53935';
+      ctx.beginPath(); ctx.ellipse(0, -18, 5, 4, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#111';
+      if (hit) {
+        ctx.strokeStyle = '#111'; ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(-14, -28); ctx.lineTo(-8, -22); ctx.moveTo(-8, -28); ctx.lineTo(-14, -22);
+        ctx.moveTo(8, -28); ctx.lineTo(14, -22); ctx.moveTo(14, -28); ctx.lineTo(8, -22);
+        ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.arc(-11, -25, 3.5, 0, Math.PI * 2); ctx.arc(11, -25, 3.5, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function renderMoleMode() {
+    // 藍天與翠綠草地背景
+    const skyGr = ctx.createLinearGradient(0, 0, 0, CH);
+    skyGr.addColorStop(0, '#1e3c72');
+    skyGr.addColorStop(0.28, '#2a5298');
+    skyGr.addColorStop(0.29, '#2e7d32');
+    skyGr.addColorStop(1, '#1b5e20');
+    ctx.fillStyle = skyGr;
+    ctx.fillRect(0, 0, CW, CH);
+
+    // 遠山與白雲裝飾
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    for (let i = 0; i < 4; i++) {
+      const cx = ((i * 260 + GAME.t * 18) % (CW + 160)) - 80;
+      ctx.beginPath(); ctx.ellipse(cx, 55 + (i % 2) * 22, 55, 18, 0, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // 木造九宮格底座框
+    ctx.fillStyle = 'rgba(30, 18, 10, 0.32)';
+    roundRect(110, 105, 740, 415, 28);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 202, 40, 0.45)';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // 繪製 9 個地洞與冒出的地鼠
+    GAME.holes.forEach(h => {
+      const s = h.s, rx = 68 * s, ry = 22 * s;
+      ctx.save();
+      ctx.translate(h.x, h.y);
+
+      if (GAME.mallet.sel === h.idx) {
+        ctx.strokeStyle = '#ffca28';
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.ellipse(0, 2, rx + 10, ry + 6, 0, 0, Math.PI * 2); ctx.stroke();
+      }
+
+      // 洞口深色內緣
+      ctx.fillStyle = '#4e342e';
+      ctx.beginPath(); ctx.ellipse(0, 0, rx + 6, ry + 5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#1b0f0a';
+      ctx.beginPath(); ctx.ellipse(0, 2, rx, ry, 0, 0, Math.PI * 2); ctx.fill();
+
+      const m = h.mole;
+      if (m && m.up > 0) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(-rx * 1.35, -145 * s, rx * 2.7, 148 * s);
+        ctx.clip();
+
+        const popOffset = (1 - m.up) * 95 * s;
+        ctx.translate(0, popOffset);
+        drawCuteCritter(0, 10 * s, s, m.critter, m.state === 'hit');
+
+        // 地鼠舉著的子母音大木牌
+        const pw = 86 * s, ph = 46 * s, py = -68 * s;
+        ctx.fillStyle = m.right ? '#ffca28' : m.wrong ? '#ef5350' : m.kind === 'bomb' ? '#ffebee' : '#fff8e7';
+        roundRect(-pw / 2, py - ph / 2, pw, ph, 11 * s);
+        ctx.fill();
+        ctx.strokeStyle = m.kind === 'bomb' ? '#d50000' : '#ffb300';
+        ctx.lineWidth = 3.5;
+        ctx.stroke();
+
+        ctx.fillStyle = m.wrong ? '#fff' : '#2b1700';
+        const label = m.kind === 'letter' ? dispKey(m.pkey) : m.pkey;
+        ctx.font = `900 ${Math.round((label.length > 3 ? 20 : 28) * s)}px "Charis SIL", "Calibri", "Tahoma", "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, 0, py + 1);
+        ctx.restore();
+      }
+
+      // 洞口前景草皮遮罩
+      ctx.fillStyle = '#3e2723';
+      ctx.beginPath(); ctx.ellipse(0, 4, rx + 6, ry + 4, 0, 0, Math.PI); ctx.fill();
+      ctx.strokeStyle = '#66bb6a';
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.ellipse(0, 1, rx + 3, ry + 1, 0, 0.12, Math.PI - 0.12); ctx.stroke();
+
+      // 數字鍵標示 [1~9]
+      ctx.fillStyle = 'rgba(20, 11, 41, 0.85)';
+      roundRect(rx - 14, ry - 10, 26, 22, 6);
+      ctx.fill();
+      ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#ffca28';
+      ctx.font = '800 13px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(String(h.num), rx - 1, ry + 1);
+
+      ctx.restore();
+    });
+
+    // 繪製木槌
+    ctx.save();
+    ctx.translate(GAME.mallet.x + 28, GAME.mallet.y + 15);
+    const swing = GAME.mallet.hit > 0 ? -Math.sin(GAME.mallet.hit * Math.PI) * 1.1 : -0.28;
+    ctx.rotate(swing);
+    ctx.fillStyle = '#8d6e63'; roundRect(-6, -4, 14, 56, 6); ctx.fill();
+    ctx.fillStyle = '#e53935'; roundRect(-34, -36, 68, 34, 10); ctx.fill();
+    ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.fillStyle = '#fff8e7'; ctx.font = '900 15px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('台', 0, -19);
+    ctx.restore();
+  }
+
+  /* =========================================================================
+     7B. 模式二：🧊 3D 魔術方塊 (3D Magic Cube)
+     ========================================================================= */
+  const CUBE_FACE_DEFS = [
+    { name:'前', color:'#e53935', n:[0,0,1],  u:[1,0,0],  v:[0,1,0] },
+    { name:'右', color:'#ffb300', n:[1,0,0],  u:[0,0,-1], v:[0,1,0] },
+    { name:'後', color:'#00897b', n:[0,0,-1], u:[-1,0,0], v:[0,1,0] },
+    { name:'左', color:'#1e88e5', n:[-1,0,0], u:[0,0,1],  v:[0,1,0] },
+    { name:'頂', color:'#8e24aa', n:[0,-1,0], u:[1,0,0],  v:[0,0,1] },
+    { name:'底', color:'#fb8c00', n:[0,1,0],  u:[1,0,0],  v:[0,0,-1] }
+  ];
+
+  const CUBE_UI_BTNS = [
+    { x: 45,  y: 135, w: 145, h: 42, label: '[左轉] 上層 (Q)', act: () => startCubeTwist('y', -1, 1) },
+    { x: 45,  y: 190, w: 145, h: 42, label: '[右轉] 中層 (W)', act: () => startCubeTwist('y', 0, -1) },
+    { x: 45,  y: 245, w: 145, h: 42, label: '[左轉] 下層 (E)', act: () => startCubeTwist('y', 1, 1) },
+    { x: 770, y: 135, w: 145, h: 42, label: '[上轉] 左列 (A)', act: () => startCubeTwist('x', -1, 1) },
+    { x: 770, y: 190, w: 145, h: 42, label: '[下轉] 中列 (S)', act: () => startCubeTwist('x', 0, -1) },
+    { x: 770, y: 245, w: 145, h: 42, label: '[上轉] 右列 (D)', act: () => startCubeTwist('x', 1, 1) },
+    { x: 250, y: 475, w: 105, h: 40, label: '[左視角]',   act: () => { GAME.cube.targetRotY -= 0.55; SFX.pop(); } },
+    { x: 365, y: 475, w: 105, h: 40, label: '[上視角]',   act: () => { GAME.cube.targetRotX = Math.max(-1.1, GAME.cube.targetRotX - 0.42); SFX.pop(); } },
+    { x: 480, y: 475, w: 105, h: 40, label: '[下視角]',   act: () => { GAME.cube.targetRotX = Math.min(1.1, GAME.cube.targetRotX + 0.42); SFX.pop(); } },
+    { x: 595, y: 475, w: 105, h: 40, label: '[右視角]',   act: () => { GAME.cube.targetRotY += 0.55; SFX.pop(); } }
+  ];
+
+  function populateCubeForQ(q) {
+    const opts = [q.pkey, ...pickDistractors(q.pkey, 3)];
+    const cells = [];
+    for (let f = 0; f < 6; f++) {
+      const face = [];
+      for (let r = 0; r < 3; r++) {
+        const row = [];
+        for (let c = 0; c < 3; c++) {
+          const k = opts[(f * 5 + r * 3 + c) % opts.length];
+          row.push({ pkey: k, state: null });
+        }
+        face.push(row);
+      }
+      cells.push(face);
+    }
+    // 確保正面與右側都能看到正確答案與干擾項
+    const coords = [[0,1], [1,0], [1,2], [2,1]];
+    opts.forEach((k, idx) => {
+      const [r, c] = coords[idx];
+      cells[0][r][c] = { pkey: k, state: null };
+      cells[1][r][c] = { pkey: opts[(idx + 1) % opts.length], state: null };
+    });
+    const wrongKey = opts.find(k => k !== q.pkey) || opts[0];
+    cells[0][1][1] = { pkey: wrongKey, state: null };
+    GAME.cube.cells = cells;
+    GAME.cube.twist = null;
+  }
+
+  function startCubeTwist(axis, layer, dir) {
+    if (GAME.cube.twist) return;
+    SFX.twist();
+    GAME.cube.twist = { axis, layer, dir, ang: 0 };
+  }
+
+  function permuteCube(cells, axis, layer, dir) {
+    const copy = cells.map(f => f.map(r => r.map(c => ({ ...c }))));
+    if (axis === 'y') {
+      const r = layer + 1;
+      const ring = [0, 1, 2, 3];
+      for (let i = 0; i < 4; i++) {
+        const src = ring[(i + (dir > 0 ? 1 : 3)) % 4];
+        for (let c = 0; c < 3; c++) cells[ring[i]][r][c] = copy[src][r][c];
+      }
+    } else if (axis === 'x') {
+      const c = layer + 1;
+      for (let r = 0; r < 3; r++) {
+        if (dir > 0) {
+          cells[0][r][c] = copy[5][r][c];
+          cells[4][r][c] = copy[0][r][c];
+          cells[2][2 - r][2 - c] = copy[4][r][c];
+          cells[5][r][c] = copy[2][2 - r][2 - c];
+        } else {
+          cells[0][r][c] = copy[4][r][c];
+          cells[5][r][c] = copy[0][r][c];
+          cells[2][2 - r][2 - c] = copy[5][r][c];
+          cells[4][r][c] = copy[2][2 - r][2 - c];
+        }
+      }
+    }
+  }
+
+  function rotateVec3(p, ax, ay) {
+    const cy = Math.cos(ay), sy = Math.sin(ay);
+    const x1 = p[0] * cy + p[2] * sy, z1 = -p[0] * sy + p[2] * cy, y1 = p[1];
+    const cx = Math.cos(ax), sx = Math.sin(ax);
+    return [x1, y1 * cx - z1 * sx, y1 * sx + z1 * cx];
+  }
+
+  function rotateAxisVec3(p, axis, ang) {
+    const c = Math.cos(ang), s = Math.sin(ang);
+    if (axis === 'y') return [p[0] * c + p[2] * s, p[1], -p[0] * s + p[2] * c];
+    if (axis === 'x') return [p[0], p[1] * c - p[2] * s, p[1] * s + p[2] * c];
+    return p;
+  }
+
+  function updateCubeMode(dt) {
+    const cb = GAME.cube;
+    cb.rotX += (cb.targetRotX - cb.rotX) * Math.min(1, dt * 10);
+    cb.rotY += (cb.targetRotY - cb.rotY) * Math.min(1, dt * 10);
+    if (cb.twist) {
+      cb.twist.ang += dt * 5.2;
+      if (cb.twist.ang >= Math.PI / 2) {
+        permuteCube(cb.cells, cb.twist.axis, cb.twist.layer, cb.twist.dir);
+        cb.twist = null;
+      }
+    }
+  }
+
+  function renderCubeMode() {
+    const cb = GAME.cube;
+    const bgGr = ctx.createRadialGradient(CW / 2, CH / 2, 40, CW / 2, CH / 2, 520);
+    bgGr.addColorStop(0, '#2c1b54');
+    bgGr.addColorStop(1, '#120924');
+    ctx.fillStyle = bgGr;
+    ctx.fillRect(0, 0, CW, CH);
+
+    ctx.fillStyle = '#ffca28';
+    ctx.font = '800 16px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('💡 拖曳畫面可 360° 旋轉方塊，直接點選正確的子母音方塊格！（轉到正中央黃金框可得雙倍加分）', CW / 2, 34);
+
+    const cx = CW / 2, cy = 255, R_SIZE = 112, FOV = 540;
+    const quads = [];
+
+    for (let f = 0; f < 6; f++) {
+      const fd = CUBE_FACE_DEFS[f];
+      for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+          const u0 = (c - 1) * 2 / 3, v0 = (r - 1) * 2 / 3;
+          const ix = Math.round(fd.n[0] + fd.u[0] * (c - 1) + fd.v[0] * (r - 1));
+          const iy = Math.round(fd.n[1] + fd.u[1] * (c - 1) + fd.v[1] * (r - 1));
+
+          const projectPt = (du, dv, scaleGap) => {
+            let p = [
+              fd.n[0] + fd.u[0] * (u0 + du * scaleGap) + fd.v[0] * (v0 + dv * scaleGap),
+              fd.n[1] + fd.u[1] * (u0 + du * scaleGap) + fd.v[1] * (v0 + dv * scaleGap),
+              fd.n[2] + fd.u[2] * (u0 + du * scaleGap) + fd.v[2] * (v0 + dv * scaleGap)
+            ];
+            if (cb.twist) {
+              const hitSlice = (cb.twist.axis === 'x' && ix === cb.twist.layer) || (cb.twist.axis === 'y' && iy === cb.twist.layer);
+              if (hitSlice) p = rotateAxisVec3(p, cb.twist.axis, cb.twist.ang * cb.twist.dir);
+            }
+            return rotateVec3(p, cb.rotX, cb.rotY);
+          };
+
+          let nVec = [...fd.n];
+          if (cb.twist) {
+            const hitSlice = (cb.twist.axis === 'x' && ix === cb.twist.layer) || (cb.twist.axis === 'y' && iy === cb.twist.layer);
+            if (hitSlice) nVec = rotateAxisVec3(nVec, cb.twist.axis, cb.twist.ang * cb.twist.dir);
+          }
+          nVec = rotateVec3(nVec, cb.rotX, cb.rotY);
+          if (nVec[2] <= 0.05) continue;
+
+          const pCenter = projectPt(0, 0, 0);
+          const sC = FOV / (FOV - pCenter[2] * R_SIZE);
+          const basePts = [[-1,-1],[1,-1],[1,1],[-1,1]].map(([du, dv]) => {
+            const pt = projectPt(du, dv, 0.33);
+            const sc = FOV / (FOV - pt[2] * R_SIZE);
+            return [cx + pt[0] * R_SIZE * sc, cy + pt[1] * R_SIZE * sc];
+          });
+          const stPts = [[-1,-1],[1,-1],[1,1],[-1,1]].map(([du, dv]) => {
+            const pt = projectPt(du, dv, 0.285);
+            const sc = FOV / (FOV - pt[2] * R_SIZE);
+            return [cx + pt[0] * R_SIZE * sc, cy + pt[1] * R_SIZE * sc];
+          });
+
+          quads.push({
+            f, r, c, z: pCenter[2], nz: nVec[2],
+            sx: cx + pCenter[0] * R_SIZE * sC,
+            sy: cy + pCenter[1] * R_SIZE * sC,
+            basePts, stPts, fd, cell: cb.cells[f][r][c]
+          });
+        }
+      }
+    }
+
+    quads.sort((a, b) => a.z - b.z);
+    cb.quads = quads;
+
+    quads.forEach(q => {
+      ctx.fillStyle = '#140c24';
+      ctx.beginPath();
+      q.basePts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      ctx.closePath(); ctx.fill();
+
+      const cell = q.cell;
+      let fill = q.fd.color;
+      if (cell.state === 'right') fill = '#ffca28';
+      else if (cell.state === 'wrong') fill = '#546e7a';
+
+      ctx.fillStyle = fill;
+      ctx.beginPath();
+      q.stPts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      ctx.closePath(); ctx.fill();
+
+      const isFrontCenter = (q.f === 0 && q.r === 1 && q.c === 1);
+      ctx.strokeStyle = isFrontCenter ? '#fff59d' : 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = isFrontCenter ? 3.5 : 1.5;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(q.sx, q.sy);
+      const label = dispKey(cell.pkey);
+      ctx.font = `900 ${label.length > 3 ? 18 : 24}px "Charis SIL", "Calibri", "Tahoma", "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.65)';
+      ctx.strokeText(label, 0, 1);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(label, 0, 1);
+      ctx.restore();
+    });
+
+    // 繪製兩側轉層與底部視角按鈕
+    CUBE_UI_BTNS.forEach(b => {
+      ctx.fillStyle = 'rgba(40, 27, 77, 0.92)';
+      roundRect(b.x, b.y, b.w, b.h, 10);
+      ctx.fill();
+      ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#ffca28';
+      ctx.font = '800 14px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(b.label, b.x + b.w / 2, b.y + b.h / 2 + 1);
+    });
+  }
+
+  /* =========================================================================
+     7C. 模式三：🧩 子母音拼字魔方 (Syllable Cube Mixer)
+     ========================================================================= */
+  const SPELL_UI_BTNS = [
+    { x: 185, y: 120, w: 64, h: 42, label: '左轉', act: () => spinSpell('L', -1) },
+    { x: 375, y: 120, w: 64, h: 42, label: '右轉', act: () => spinSpell('L', 1) },
+    { x: 525, y: 120, w: 64, h: 42, label: '左轉', act: () => spinSpell('R', -1) },
+    { x: 715, y: 120, w: 64, h: 42, label: '右轉', act: () => spinSpell('R', 1) },
+    { x: 340, y: 445, w: 280, h: 56, label: '🌟 魔方合體拼音！(空白鍵)', act: () => triggerSpellFuse(), gold: true }
+  ];
+
+  function setupSpellForQ(q) {
+    const w = q.word;
+    const isInitial = q.p.cat.startsWith('子音');
+    let ansL = '', ansR = '', leftPool = [], rightPool = [];
+
+    if (isInitial) {
+      ansL = dispKey(w.ans);
+      ansR = toPOJ(w.post);
+      leftPool = shuffle([ansL, ...pickDistractors(q.pkey, 3).map(dispKey)]);
+      const sampleFinals = ['ue-lîng-ki', 'au-á', 'ê-pue', 'iáu-á', 'i-kue', 'uí', 'ia'].map(toPOJ).filter(x => x !== ansR);
+      rightPool = shuffle([ansR, ...shuffle(sampleFinals).slice(0, 3)]);
+    } else {
+      ansL = w.pre ? toPOJ(w.pre) : '無子音';
+      ansR = toPOJ(w.ans + w.post);
+      const samplePre = ['p', 't', 'k', 'ts', 's', 'h', 'pe̍h-b', 'hué-tsh'].map(toPOJ).filter(x => x !== ansL);
+      leftPool = shuffle([ansL, ...shuffle(samplePre).slice(0, 3)]);
+      rightPool = shuffle([ansR, ...pickDistractors(q.pkey, 3).map(k => toPOJ(k.replace('-', '') + w.post))]);
+    }
+
+    let curL = (leftPool.indexOf(ansL) + 1) % leftPool.length;
+    let curR = (rightPool.indexOf(ansR) + 1) % rightPool.length;
+    GAME.spell = { leftOpts: leftPool, rightOpts: rightPool, curL, curR, ansL, ansR, rotL: 0, rotR: 0, fuseAnim: 0 };
+  }
+
+  function spinSpell(side, dir) {
+    if (STATE.view !== 'game' || STATE.mode !== 'spell') return;
+    const sp = GAME.spell;
+    if (sp.fuseAnim > 0) return;
+    SFX.twist();
+    if (side === 'L') {
+      sp.curL = (sp.curL + dir + sp.leftOpts.length) % sp.leftOpts.length;
+      sp.rotL = dir * 1.1;
+    } else {
+      sp.curR = (sp.curR + dir + sp.rightOpts.length) % sp.rightOpts.length;
+      sp.rotR = dir * 1.1;
+    }
+  }
+
+  function triggerSpellFuse() {
+    if (STATE.view !== 'game' || STATE.mode !== 'spell') return;
+    const sp = GAME.spell;
+    if (sp.fuseAnim > 0) return;
+    const selL = sp.leftOpts[sp.curL], selR = sp.rightOpts[sp.curR];
+    if (selL === sp.ansL && selR === sp.ansR) {
+      sp.fuseAnim = 0.01;
+      SFX.fuse();
+      onCorrectAnswer(CW / 2, 290, 50);
+    } else {
+      const hint = selL !== sp.ansL ? '左邊「頭前音方塊」還不對喔，點左方塊轉轉看！' : '右邊「後壁音方塊」還不對喔，點右方塊轉轉看！';
+      onWrongAnswer(CW / 2, 290, '💡 ' + hint);
+    }
+  }
+
+  function updateSpellMode(dt) {
+    const sp = GAME.spell;
+    sp.rotL *= Math.pow(0.04, dt);
+    sp.rotR *= Math.pow(0.04, dt);
+    if (sp.fuseAnim > 0) sp.fuseAnim = Math.min(1, sp.fuseAnim + dt * 2.2);
+  }
+
+  function draw3DBlock(cx, cy, size, label, sub, mainCol, sideCol, topCol, rot) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    const w = size, h = size, dx = 28 + rot * 18, dy = -24;
+
+    ctx.fillStyle = topCol;
+    ctx.beginPath(); ctx.moveTo(-w/2, -h/2); ctx.lineTo(-w/2 + dx, -h/2 + dy); ctx.lineTo(w/2 + dx, -h/2 + dy); ctx.lineTo(w/2, -h/2); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = '#120924'; ctx.lineWidth = 2.5; ctx.stroke();
+
+    ctx.fillStyle = sideCol;
+    ctx.beginPath(); ctx.moveTo(w/2, -h/2); ctx.lineTo(w/2 + dx, -h/2 + dy); ctx.lineTo(w/2 + dx, h/2 + dy); ctx.lineTo(w/2, h/2); ctx.closePath(); ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#120924';
+    roundRect(-w/2, -h/2, w, h, 14); ctx.fill();
+
+    const pad = 7, sw = (w - pad * 3) / 2;
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) {
+      ctx.fillStyle = mainCol;
+      roundRect(-w/2 + pad + c * (sw + pad), -h/2 + pad + r * (sw + pad), sw, sw, 8);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#fff9e6';
+    roundRect(-w * 0.42, -h * 0.34, w * 0.84, h * 0.68, 12);
+    ctx.fill();
+    ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 3; ctx.stroke();
+
+    ctx.fillStyle = '#2b1700';
+    ctx.font = `900 ${label.length > 6 ? 22 : label.length > 3 ? 28 : 38}px "Charis SIL", "Calibri", "Tahoma", "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(label, 0, sub ? -8 : 2);
+    if (sub) {
+      ctx.fillStyle = '#8d6e63';
+      ctx.font = '800 14px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      ctx.fillText(sub, 0, 26);
+    }
+    ctx.restore();
+  }
+
+  function renderSpellMode() {
+    const sp = GAME.spell;
+    const bgGr = ctx.createLinearGradient(0, 0, 0, CH);
+    bgGr.addColorStop(0, '#231542');
+    bgGr.addColorStop(1, '#120924');
+    ctx.fillStyle = bgGr;
+    ctx.fillRect(0, 0, CW, CH);
+
+    ctx.fillStyle = '#ffca28';
+    ctx.font = '800 18px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('頭前音（子音方塊）', 312, 95);
+    ctx.fillStyle = '#80deea';
+    ctx.fillText('後壁音（母音韻母方塊）', 648, 95);
+
+    const f = sp.fuseAnim;
+    const lx = 312 + f * 168, rx = 648 - f * 168;
+    const selL = sp.leftOpts[sp.curL] || '', selR = sp.rightOpts[sp.curR] || '';
+
+    if (f < 0.85) {
+      draw3DBlock(lx, 285, 156, selL, selL === '無子音' ? '無子音開頭' : '點擊方塊旋轉切換', '#e53935', '#ab000d', '#ff6f60', sp.rotL);
+      draw3DBlock(rx, 285, 156, selR, '點擊方塊旋轉切換', '#00897b', '#005b4f', '#4ebaaa', sp.rotR);
+      ctx.fillStyle = '#ffca28';
+      ctx.font = '900 48px sans-serif';
+      ctx.fillText('+', CW / 2, 285);
+    } else {
+      const q = currentQ();
+      draw3DBlock(CW / 2, 285, 176, q ? toPOJ(q.word.tl.replace(/[\[\]]/g, '')) : '', q ? q.word.h : '', '#ffb300', '#c68400', '#ffe54c', 0);
+    }
+
+    SPELL_UI_BTNS.forEach(b => {
+      ctx.fillStyle = b.gold ? '#ffca28' : 'rgba(52, 36, 99, 0.92)';
+      roundRect(b.x, b.y, b.w, b.h, 12);
+      ctx.fill();
+      ctx.strokeStyle = b.gold ? '#fff8e1' : '#ffca28';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      ctx.fillStyle = b.gold ? '#361a00' : '#ffca28';
+      ctx.font = `900 ${b.gold ? 20 : 18}px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(b.label, b.x + b.w / 2, b.y + b.h / 2 + 1);
+    });
+  }
+
+  /* =========================================================================
+     8. 畫布互動事件與主迴圈
+     ========================================================================= */
+  function getCanvasPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    return [
+      (e.clientX - rect.left) / rect.width * CW,
+      (e.clientY - rect.top) / rect.height * CH
+    ];
+  }
+
+  function pointInPoly(px, py, pts) {
+    let inside = false;
+    for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+      const xi = pts[i][0], yi = pts[i][1], xj = pts[j][0], yj = pts[j][1];
+      if (((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi + 1e-9) + xi)) inside = !inside;
+    }
+    return inside;
+  }
+
+  let cubeDrag = null;
+  canvas.addEventListener('pointerdown', e => {
+    if (STATE.view !== 'game') return;
+    initAudio();
+    const [mx, my] = getCanvasPos(e);
+
+    if (STATE.mode === 'mole') {
+      GAME.mallet.x = mx; GAME.mallet.y = my;
+      let bestIdx = -1, bestDist = 1e9;
+      GAME.holes.forEach(h => {
+        const d = Math.hypot(mx - h.x, (my - (h.y - 30 * h.s)) * 1.2);
+        if (d < 92 * h.s && d < bestDist) { bestDist = d; bestIdx = h.idx; }
+      });
+      if (bestIdx >= 0) whackMoleAt(bestIdx);
+    } else if (STATE.mode === 'cube') {
+      for (const b of CUBE_UI_BTNS) {
+        if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h) { b.act(); return; }
+      }
+      cubeDrag = { x0: mx, y0: my, lx: mx, ly: my, moved: false };
+    } else if (STATE.mode === 'spell') {
+      for (const b of SPELL_UI_BTNS) {
+        if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h) { b.act(); return; }
+      }
+      if (Math.hypot(mx - 312, my - 285) < 95) { spinSpell('L', 1); return; }
+      if (Math.hypot(mx - 648, my - 285) < 95) { spinSpell('R', 1); return; }
+    }
+  });
+
+  canvas.addEventListener('pointermove', e => {
+    if (STATE.view !== 'game') return;
+    const [mx, my] = getCanvasPos(e);
+    if (STATE.mode === 'mole') {
+      GAME.mallet.x = mx; GAME.mallet.y = my;
+    } else if (STATE.mode === 'cube' && cubeDrag) {
+      const dx = mx - cubeDrag.lx, dy = my - cubeDrag.ly;
+      if (Math.hypot(mx - cubeDrag.x0, my - cubeDrag.y0) > 8) cubeDrag.moved = true;
+      GAME.cube.targetRotY += dx * 0.0085;
+      GAME.cube.targetRotX = Math.max(-1.1, Math.min(1.1, GAME.cube.targetRotX + dy * 0.0085));
+      cubeDrag.lx = mx; cubeDrag.ly = my;
+    }
+  });
+
+  ['pointerup', 'pointercancel'].forEach(ev => canvas.addEventListener(ev, e => {
+    if (STATE.mode === 'cube' && cubeDrag) {
+      if (!cubeDrag.moved && ev === 'pointerup') {
+        const [mx, my] = getCanvasPos(e);
+        const quads = GAME.cube.quads || [];
+        const q = currentQ();
+        for (let i = quads.length - 1; i >= 0; i--) {
+          const item = quads[i];
+          if (pointInPoly(mx, my, item.basePts) && q) {
+            SFX.whack();
+            const isCenter = (item.f === 0 && item.r === 1 && item.c === 1);
+            if (item.cell.pkey === q.pkey) {
+              item.cell.state = 'right';
+              startCubeTwist('y', 0, 1);
+              onCorrectAnswer(item.sx, item.sy, isCenter ? 100 : 0);
+            } else {
+              item.cell.state = 'wrong';
+              onWrongAnswer(item.sx, item.sy);
+            }
+            break;
+          }
+        }
+      }
+      cubeDrag = null;
+    }
+  }));
+
+  // 鍵盤快捷鍵
+  const DIGIT_HOLE = {
+    Digit1:0, Digit2:1, Digit3:2, Digit4:3, Digit5:4, Digit6:5, Digit7:6, Digit8:7, Digit9:8,
+    Numpad7:0, Numpad8:1, Numpad9:2, Numpad4:3, Numpad5:4, Numpad6:5, Numpad1:6, Numpad2:7, Numpad3:8
+  };
+
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Escape') {
+      if (backdrop.classList.contains('open')) closeModal();
+      else if (STATE.view !== 'home') window.switchView('home');
+      return;
+    }
+    if (STATE.view !== 'game' || backdrop.classList.contains('open')) return;
+    if (e.code === 'KeyV') {
+      const q = currentQ();
+      if (q) speakPhonetic(q.pkey, q.word);
+      return;
+    }
+    if (STATE.mode === 'mole') {
+      if (DIGIT_HOLE[e.code] !== undefined) { e.preventDefault(); whackMoleAt(DIGIT_HOLE[e.code]); }
+    } else if (STATE.mode === 'cube') {
+      if (e.code === 'KeyQ') startCubeTwist('y', -1, 1);
+      else if (e.code === 'KeyW') startCubeTwist('y', 0, -1);
+      else if (e.code === 'KeyE') startCubeTwist('y', 1, 1);
+      else if (e.code === 'KeyA') startCubeTwist('x', -1, 1);
+      else if (e.code === 'KeyS') startCubeTwist('x', 0, -1);
+      else if (e.code === 'KeyD') startCubeTwist('x', 1, 1);
+      else if (e.code === 'ArrowLeft') GAME.cube.targetRotY -= 0.45;
+      else if (e.code === 'ArrowRight') GAME.cube.targetRotY += 0.45;
+      else if (e.code === 'ArrowUp') GAME.cube.targetRotX = Math.max(-1.1, GAME.cube.targetRotX - 0.35);
+      else if (e.code === 'ArrowDown') GAME.cube.targetRotX = Math.min(1.1, GAME.cube.targetRotX + 0.35);
+    } else if (STATE.mode === 'spell') {
+      if (e.code === 'KeyA' || e.code === 'ArrowUp') { e.preventDefault(); spinSpell('L', -1); }
+      else if (e.code === 'KeyD' || e.code === 'ArrowDown') { e.preventDefault(); spinSpell('L', 1); }
+      else if (e.code === 'ArrowLeft') { e.preventDefault(); spinSpell('R', -1); }
+      else if (e.code === 'ArrowRight') { e.preventDefault(); spinSpell('R', 1); }
+      else if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); triggerSpellFuse(); }
+    }
+  });
+
+  // 動畫主迴圈
+  let lastTime = performance.now();
+  function gameLoop(now) {
+    const dt = Math.min(0.033, (now - lastTime) / 1000);
+    lastTime = now;
+
+    if (STATE.view === 'game' && GAME.active) {
+      GAME.t += dt;
+      if (GAME.shake > 0) GAME.shake = Math.max(0, GAME.shake - dt);
+      if (GAME.toast) {
+        GAME.toast.t -= dt;
+        if (GAME.toast.t <= 0) GAME.toast = null;
+      }
+
+      if (STATE.mode === 'mole') updateMoleMode(dt);
+      else if (STATE.mode === 'cube') updateCubeMode(dt);
+      else if (STATE.mode === 'spell') updateSpellMode(dt);
+
+      // 更新粒子與浮動文字
+      GAME.particles.forEach(p => {
+        p.life -= dt;
+        if (p.kind === 'dot') { p.vy += 650 * dt; p.x += p.vx * dt; p.y += p.vy * dt; }
+        else if (p.kind === 'text') { p.y += p.vy * dt; }
+      });
+      GAME.particles = GAME.particles.filter(p => p.life > 0);
+
+      // 繪製遊戲舞台
+      ctx.save();
+      if (GAME.shake > 0) {
+        ctx.translate((Math.random() - 0.5) * 10 * GAME.shake, (Math.random() - 0.5) * 10 * GAME.shake);
+      }
+
+      if (STATE.mode === 'mole') renderMoleMode();
+      else if (STATE.mode === 'cube') renderCubeMode();
+      else if (STATE.mode === 'spell') renderSpellMode();
+
+      // 繪製粒子與浮動文字
+      GAME.particles.forEach(p => {
+        ctx.globalAlpha = Math.max(0, p.life / p.max);
+        if (p.kind === 'dot') {
+          ctx.fillStyle = p.color;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        } else if (p.kind === 'text') {
+          ctx.font = '900 26px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+          ctx.strokeText(p.text, p.x, p.y);
+          ctx.fillStyle = p.color;
+          ctx.fillText(p.text, p.x, p.y);
+        }
+        ctx.globalAlpha = 1;
+      });
+
+      // 繪製底部提示訊息 (Toast)
+      if (GAME.toast) {
+        ctx.font = '800 18px "Charis SIL", "Calibri", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        const tw = Math.min(CW - 40, ctx.measureText(GAME.toast.text).width + 44);
+        ctx.fillStyle = 'rgba(20, 11, 41, 0.92)';
+        roundRect((CW - tw) / 2, CH - 52, tw, 40, 20);
+        ctx.fill();
+        ctx.strokeStyle = '#ffca28'; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = '#fff8e7';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(GAME.toast.text, CW / 2, CH - 31);
+      }
+      ctx.restore();
+    }
+
+    requestAnimationFrame(gameLoop);
+  }
+
+  syncModeUI();
+  requestAnimationFrame(gameLoop);
+})();
+</script>
+</body>
+</html>
